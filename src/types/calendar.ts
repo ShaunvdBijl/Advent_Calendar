@@ -80,6 +80,11 @@ export interface Day10State {
   candyTheme: 'peppermint' | 'gumdrop-rainbow' | 'gold-dragees';
 }
 
+export interface Day11State {
+  builtAt: string;
+  stickArms: 'waving' | 'downward';
+}
+
 export interface CalendarProgress {
   completedDays: number[];
   day1?: Day1State;
@@ -92,4 +97,5 @@ export interface CalendarProgress {
   day8?: Day8State;
   day9?: Day9State;
   day10?: Day10State;
+  day11?: Day11State;
 }

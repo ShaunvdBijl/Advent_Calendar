@@ -743,3 +743,17 @@ dialog.day-dialog::backdrop {
 .steam-rise {
   animation: steamRise 2.4s ease-out infinite;
 }
+
+/* Day 11: Draggable Snowman Builder */
+.drag-canvas-svg {
+  touch-action: none;
+  user-select: none;
+}
+
+.draggable-part {
+  cursor: grab;
+}
+
+.draggable-part:active {
+  cursor: grabbing;
+}

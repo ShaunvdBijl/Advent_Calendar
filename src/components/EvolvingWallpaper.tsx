@@ -1,6 +1,7 @@
 import type { CalendarProgress } from '../types/calendar';
 import { ChristmasPhotoArt } from './ChristmasPhotoArt';
 import { GingerbreadHouseArt } from './GingerbreadHouseArt';
+import { SnowmanArt } from './SnowmanArt';
 
 interface EvolvingWallpaperProps {
   progress: CalendarProgress;
@@ -17,6 +18,7 @@ export function EvolvingWallpaper({ progress }: EvolvingWallpaperProps) {
   const hasDay8 = progress.completedDays.includes(8);
   const hasDay9 = progress.completedDays.includes(9);
   const hasDay10 = progress.completedDays.includes(10);
+  const hasDay11 = progress.completedDays.includes(11);
   const hasDay15 = progress.completedDays.includes(15);
   const treeColors =
     progress.day1?.treeVariant === 'spruce'
@@ -161,6 +163,13 @@ export function EvolvingWallpaper({ progress }: EvolvingWallpaperProps) {
             <rect x="1122" y="475" width="16" height="40" fill="#4f311d" />
             <polygon points="1130,335 1085,435 1175,435" fill="#1e4937" />
             <polygon points="1130,380 1075,485 1185,485" fill="#235540" />
+          </g>
+        )}
+
+        {/* Day 11 Evolution: Snowman Standing in the Snowy Yard */}
+        {hasDay11 && (
+          <g id="day11-yard-snowman" transform="translate(1265, 536) scale(0.95)">
+            <SnowmanArt stickArms={progress.day11?.stickArms ?? 'waving'} />
           </g>
         )}
 
