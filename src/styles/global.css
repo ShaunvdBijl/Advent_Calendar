@@ -757,3 +757,35 @@ dialog.day-dialog::backdrop {
 .draggable-part:active {
   cursor: grabbing;
 }
+
+/* Day 14: Winter Bird Feeder */
+@keyframes birdBob {
+  0%,
+  100% {
+    transform: translate(212px, 118px) rotate(0deg);
+  }
+  45% {
+    transform: translate(212px, 116px) rotate(5deg);
+  }
+  60% {
+    transform: translate(212px, 118px) rotate(-2deg);
+  }
+}
+
+.bird-bob {
+  animation: birdBob 2.8s ease-in-out infinite;
+}
+
+@keyframes yardBirdBob {
+  0%,
+  100% {
+    transform: translateY(0px);
+  }
+  50% {
+    transform: translateY(-2.5px);
+  }
+}
+
+.yard-bird-bob {
+  animation: yardBirdBob 2.4s ease-in-out infinite;
+}

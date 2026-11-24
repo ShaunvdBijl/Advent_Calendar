@@ -96,6 +96,11 @@ export interface Day13State {
   palette: 'warm-white' | 'classic-multicolor' | 'icicle-blue';
 }
 
+export interface Day14State {
+  builtAt: string;
+  birdKind: 'red-robin' | 'snow-cardinal' | 'blue-jay';
+}
+
 export interface CalendarProgress {
   completedDays: number[];
   day1?: Day1State;
@@ -111,4 +116,5 @@ export interface CalendarProgress {
   day11?: Day11State;
   day12?: Day12State;
   day13?: Day13State;
+  day14?: Day14State;
 }
