@@ -389,3 +389,45 @@ dialog.day-dialog::backdrop {
   flex-wrap: wrap;
   justify-content: center;
 }
+
+/* Day 2: Build Tree */
+.day2-container {
+  display: flex;
+  flex-direction: column;
+  gap: 0.9rem;
+}
+
+.day2-options-row {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  gap: 0.5rem;
+}
+
+.day2-scene-wrap {
+  width: 100%;
+  border-radius: 12px;
+  overflow: hidden;
+  border: 1px solid rgba(255, 255, 255, 0.12);
+}
+
+.day2-svg {
+  display: block;
+  width: 100%;
+  height: auto;
+}
+
+@keyframes treePartPop {
+  from {
+    opacity: 0;
+    transform: translateY(-10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.tree-part-enter {
+  animation: treePartPop 0.28s ease-out;
+}
