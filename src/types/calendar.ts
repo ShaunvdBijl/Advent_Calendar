@@ -91,6 +91,11 @@ export interface Day12State {
   hatBandColor: string;
 }
 
+export interface Day13State {
+  strungAt: string;
+  palette: 'warm-white' | 'classic-multicolor' | 'icicle-blue';
+}
+
 export interface CalendarProgress {
   completedDays: number[];
   day1?: Day1State;
@@ -105,4 +110,5 @@ export interface CalendarProgress {
   day10?: Day10State;
   day11?: Day11State;
   day12?: Day12State;
+  day13?: Day13State;
 }
