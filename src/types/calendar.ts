@@ -159,6 +159,11 @@ export interface Day23State {
   hasCandyStraw: boolean;
 }
 
+export interface Day24State {
+  crownedAt: string;
+  starStyle: 'classic-gold' | 'bethlehem-burst' | 'crystal-silver';
+}
+
 export interface CalendarProgress {
   completedDays: number[];
   day1?: Day1State;
@@ -184,4 +189,5 @@ export interface CalendarProgress {
   day21?: Day21State;
   day22?: Day22State;
   day23?: Day23State;
+  day24?: Day24State;
 }
