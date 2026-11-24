@@ -113,6 +113,12 @@ export interface Day16State {
   sprinkleStyle: 'festive-red-green' | 'gold-stars' | 'winter-frost';
 }
 
+export interface Day17State {
+  wrappedAt: string;
+  paperStyle: 'crimson-plaid' | 'pine-stars' | 'midnight-gold';
+  ribbonColor: string;
+}
+
 export interface CalendarProgress {
   completedDays: number[];
   day1?: Day1State;
@@ -131,4 +137,5 @@ export interface CalendarProgress {
   day14?: Day14State;
   day15?: Day15State;
   day16?: Day16State;
+  day17?: Day17State;
 }
