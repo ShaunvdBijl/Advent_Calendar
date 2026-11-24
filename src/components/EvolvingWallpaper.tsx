@@ -1,4 +1,5 @@
 import type { CalendarProgress } from '../types/calendar';
+import { ChristmasPhotoArt } from './ChristmasPhotoArt';
 
 interface EvolvingWallpaperProps {
   progress: CalendarProgress;
@@ -8,6 +9,8 @@ export function EvolvingWallpaper({ progress }: EvolvingWallpaperProps) {
   const hasDay1 = progress.completedDays.includes(1);
   const hasDay2 = progress.completedDays.includes(2);
   const hasDay3 = progress.completedDays.includes(3);
+  const hasDay4 = progress.completedDays.includes(4);
+  const hasDay6 = progress.completedDays.includes(6);
   const treeColors =
     progress.day1?.treeVariant === 'spruce'
       ? { dark: '#18423e', mid: '#215853', light: '#2d756e' }
@@ -155,6 +158,31 @@ export function EvolvingWallpaper({ progress }: EvolvingWallpaperProps) {
           <rect x="675" y="575" width="125" height="16" rx="4" fill="#7c4f31" />
           <rect x="692" y="591" width="14" height="75" fill="#5c3822" />
           <rect x="769" y="591" width="14" height="75" fill="#5c3822" />
+
+          {/* Day 4 Evolution: Sketchpad resting on side table until framed on Day 6 */}
+          {hasDay4 && !hasDay6 && progress.day4 && (
+            <g id="day4-table-sketch" transform="translate(696, 514)">
+              {/* Mini wooden tabletop easel / sketchpad backing */}
+              <rect
+                x="-3"
+                y="-3"
+                width="86"
+                height="66"
+                rx="3"
+                fill="#e5dac3"
+                stroke="#8b6f47"
+                strokeWidth="2"
+              />
+              <g transform="scale(0.25)">
+                <ChristmasPhotoArt
+                  template={progress.day4.template}
+                  strokes={progress.day4.strokes}
+                />
+              </g>
+              {/* Tiny charcoal pencil resting on table */}
+              <line x1="68" y1="62" x2="96" y2="57" stroke="#23201c" strokeWidth="3" strokeLinecap="round" />
+            </g>
+          )}
         </g>
 
         {/* Tree Rug / Corner Stand (Far Left) */}

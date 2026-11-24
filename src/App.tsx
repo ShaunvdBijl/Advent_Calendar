@@ -5,7 +5,15 @@ import { EvolvingWallpaper } from './components/EvolvingWallpaper';
 import { Day01ChopTree } from './days/Day01ChopTree';
 import { Day02BuildTree } from './days/Day02BuildTree';
 import { Day03DecorateTree } from './days/Day03DecorateTree';
-import type { CalendarProgress, Day1State, Day2State, Day3State, DayMeta } from './types/calendar';
+import { Day04DrawPhoto } from './days/Day04DrawPhoto';
+import type {
+  CalendarProgress,
+  Day1State,
+  Day2State,
+  Day3State,
+  Day4State,
+  DayMeta,
+} from './types/calendar';
 
 const STORAGE_KEY = 'advent-calendar-2026-progress';
 
@@ -76,6 +84,17 @@ export function App() {
     setActiveDay(null);
   };
 
+  const completeDay4 = (day4State: Day4State) => {
+    setProgress((prev) => ({
+      ...prev,
+      completedDays: prev.completedDays.includes(4)
+        ? prev.completedDays
+        : [...prev.completedDays, 4].sort((a, b) => a - b),
+      day4: day4State,
+    }));
+    setActiveDay(null);
+  };
+
   return (
     <div className="app-shell">
       <EvolvingWallpaper progress={progress} />
@@ -134,6 +153,11 @@ export function App() {
             standStyle={progress.day2?.standStyle}
             existingState={progress.day3}
             onComplete={completeDay3}
+          />
+        ) : activeDay?.day === 4 ? (
+          <Day04DrawPhoto
+            existingState={progress.day4}
+            onComplete={completeDay4}
           />
         ) : (
           activeDay && <p>{activeDay.description}</p>

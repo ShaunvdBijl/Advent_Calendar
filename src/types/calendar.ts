@@ -32,9 +32,25 @@ export interface Day3State {
   ornaments: TreeOrnament[];
 }
 
+export type PhotoTemplate = 'cabin' | 'wreath' | 'sleigh' | 'blank';
+
+export interface PhotoStroke {
+  id: string;
+  points: string;
+  width: number;
+  color: string;
+}
+
+export interface Day4State {
+  sketchedAt: string;
+  template: PhotoTemplate;
+  strokes: PhotoStroke[];
+}
+
 export interface CalendarProgress {
   completedDays: number[];
   day1?: Day1State;
   day2?: Day2State;
   day3?: Day3State;
+  day4?: Day4State;
 }
