@@ -1,0 +1,157 @@
+import type { CalendarProgress } from '../types/calendar';
+
+interface EvolvingWallpaperProps {
+  progress: CalendarProgress;
+}
+
+export function EvolvingWallpaper({ progress }: EvolvingWallpaperProps) {
+  const hasDay1 = progress.completedDays.includes(1);
+  const treeColors =
+    progress.day1?.treeVariant === 'spruce'
+      ? { dark: '#1c4b47', light: '#2a6b65' }
+      : progress.day1?.treeVariant === 'fir'
+        ? { dark: '#173d2e', light: '#215742' }
+        : { dark: '#1e4932', light: '#2a6345' };
+
+  return (
+    <div className="wallpaper-layer" aria-hidden="true">
+      <svg
+        className="wallpaper-svg"
+        viewBox="0 0 1600 900"
+        preserveAspectRatio="xMidYMid slice"
+        xmlns="http://www.w3.org/2000/svg"
+      >
+        <defs>
+          <linearGradient id="skyGrad" x1="0" y1="0" x2="0" y2="1">
+            <stop offset="0%" stopColor="#091124" />
+            <stop offset="55%" stopColor="#132544" />
+            <stop offset="100%" stopColor="#1e385c" />
+          </linearGradient>
+          <linearGradient id="wallGrad" x1="0" y1="0" x2="0" y2="1">
+            <stop offset="0%" stopColor="#3b2618" />
+            <stop offset="100%" stopColor="#26170e" />
+          </linearGradient>
+          <linearGradient id="floorGrad" x1="0" y1="0" x2="0" y2="1">
+            <stop offset="0%" stopColor="#4f3320" />
+            <stop offset="100%" stopColor="#2e1b10" />
+          </linearGradient>
+          <linearGradient id="snowGround" x1="0" y1="0" x2="0" y2="1">
+            <stop offset="0%" stopColor="#dce9f7" />
+            <stop offset="100%" stopColor="#a7c0dc" />
+          </linearGradient>
+        </defs>
+
+        {/* Outdoor Winter Sky (visible through panoramic cabin window) */}
+        <rect x="820" y="90" width="700" height="500" fill="url(#skyGrad)" />
+
+        {/* Stars in the night sky */}
+        <g fill="#f7eed3" opacity="0.8">
+          <circle cx="910" cy="145" r="2" />
+          <circle cx="1020" cy="125" r="1.5" />
+          <circle cx="1140" cy="165" r="2.2" />
+          <circle cx="1290" cy="130" r="1.8" />
+          <circle cx="1410" cy="180" r="2.4" />
+          <circle cx="1465" cy="135" r="1.5" />
+        </g>
+
+        {/* Crescent Moon */}
+        <circle cx="1395" cy="155" r="32" fill="#f7e7b4" />
+        <circle cx="1408" cy="147" r="28" fill="#10203d" />
+
+        {/* Distant Snowy Hills */}
+        <path
+          d="M 820 430 Q 1000 370 1190 420 T 1520 400 L 1520 590 L 820 590 Z"
+          fill="#bdd1e8"
+        />
+        <path
+          d="M 820 465 Q 1030 435 1230 475 T 1520 455 L 1520 590 L 820 590 Z"
+          fill="url(#snowGround)"
+        />
+
+        {/* Background Pine Forest in Yard */}
+        <g fill="#1c3d32">
+          <polygon points="885,455 910,375 935,455" />
+          <polygon points="945,460 975,365 1005,460" />
+          <polygon points="1310,450 1340,360 1370,450" />
+          <polygon points="1420,462 1455,355 1490,462" />
+        </g>
+
+        {/* Harvested Tree Spot / Stump in the Yard (Day 1 Evolution) */}
+        {hasDay1 ? (
+          <g id="day1-yard-stump">
+            {/* Freshly cut tree stump with snow cap */}
+            <path d="M 1110 515 L 1116 485 L 1144 485 L 1150 515 Z" fill="#5b3a24" />
+            <ellipse cx="1130" cy="485" rx="14" ry="5" fill="#d9b482" />
+            <ellipse cx="1130" cy="485" rx="9" ry="3" fill="#b88b55" />
+            {/* Woodchips on snow */}
+            <ellipse cx="1102" cy="516" rx="5" ry="2" fill="#d9b482" />
+            <ellipse cx="1158" cy="514" rx="4" ry="2" fill="#c99b63" />
+            {/* Cut pine tree resting on sled/porch ready to bring inside on Day 2 */}
+            <g transform="translate(970, 505)">
+              <rect x="0" y="14" width="120" height="8" rx="3" fill="#6b4226" />
+              <polygon points="20,14 95,-12 95,40" fill={treeColors.dark} />
+              <polygon points="55,14 130,-18 130,46" fill={treeColors.light} />
+            </g>
+          </g>
+        ) : (
+          <g id="day1-standing-tree">
+            {/* Tall pine tree in yard waiting to be chopped on Day 1 */}
+            <rect x="1122" y="475" width="16" height="40" fill="#4f311d" />
+            <polygon points="1130,335 1085,435 1175,435" fill="#1e4937" />
+            <polygon points="1130,380 1075,485 1185,485" fill="#235540" />
+          </g>
+        )}
+
+        {/* Cabin Interior Walls & Floor */}
+        <path
+          d="M 0 0 L 1600 0 L 1600 900 L 0 900 Z M 830 100 L 830 570 L 1510 570 L 1510 100 Z"
+          fill="url(#wallGrad)"
+          fillRule="evenodd"
+        />
+        <rect x="0" y="650" width="1600" height="250" fill="url(#floorGrad)" />
+
+        {/* Subtle Wooden Wall Planks */}
+        <g stroke="#22130b" strokeWidth="2" opacity="0.45">
+          <line x1="0" y1="140" x2="830" y2="140" />
+          <line x1="0" y1="280" x2="830" y2="280" />
+          <line x1="0" y1="420" x2="830" y2="420" />
+          <line x1="0" y1="560" x2="830" y2="560" />
+        </g>
+
+        {/* Window Frame & Mullions */}
+        <rect
+          x="830"
+          y="100"
+          width="680"
+          height="470"
+          fill="none"
+          stroke="#6b442a"
+          strokeWidth="22"
+        />
+        <line x1="1170" y1="100" x2="1170" y2="570" stroke="#6b442a" strokeWidth="14" />
+        <line x1="830" y1="335" x2="1510" y2="335" stroke="#6b442a" strokeWidth="14" />
+        <rect x="810" y="566" width="720" height="24" rx="4" fill="#7c4f31" />
+
+        {/* Stone Fireplace & Mantle (Left-Center) */}
+        <g id="fireplace-base">
+          <rect x="330" y="340" width="290" height="310" rx="6" fill="#525866" />
+          <rect x="365" y="425" width="220" height="225" rx="90" fill="#181416" />
+          {/* Mantle Shelf */}
+          <rect x="305" y="325" width="340" height="28" rx="5" fill="#7c4f31" />
+          {/* Picture Frame Hook on Wall */}
+          <circle cx="205" cy="210" r="5" fill="#c9a459" />
+        </g>
+
+        {/* Side Table (Right of Fireplace) */}
+        <g id="side-table">
+          <rect x="675" y="575" width="125" height="16" rx="4" fill="#7c4f31" />
+          <rect x="692" y="591" width="14" height="75" fill="#5c3822" />
+          <rect x="769" y="591" width="14" height="75" fill="#5c3822" />
+        </g>
+
+        {/* Tree Rug / Corner Stand (Far Left) */}
+        <ellipse cx="165" cy="705" rx="125" ry="34" fill="#7c262d" stroke="#d9b166" strokeWidth="4" />
+      </svg>
+    </div>
+  );
+}

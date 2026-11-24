@@ -1,0 +1,28 @@
+import type { DayMeta } from '../types/calendar';
+
+export const ADVENT_DAYS: DayMeta[] = [
+  { day: 1, title: 'Chop Down Tree', description: 'Venture into the snowy woods and chop down your Christmas tree.', implemented: true },
+  { day: 2, title: 'Build Tree', description: 'Set up and assemble your freshly cut tree in the living room.', implemented: false },
+  { day: 3, title: 'Ornaments & Decorations', description: 'Hang baubles, tinsel, and garlands on the tree.', implemented: false },
+  { day: 4, title: 'Draw Christmas Photo', description: 'Sketch a festive holiday drawing.', implemented: false },
+  { day: 5, title: 'Colour in Photo', description: 'Bring your Christmas sketch to life with warm holiday colors.', implemented: false },
+  { day: 6, title: 'Frame & Hang Photo', description: 'Pick a wooden or gold frame and hang your artwork on the wall.', implemented: false },
+  { day: 7, title: 'Light the Fireplace', description: 'Stack logs and strike a match to ignite a warm, flickering fire.', implemented: false },
+  { day: 8, title: 'Start Snow Machine', description: 'Press the button to start a gentle, permanent snowfall outside.', implemented: false },
+  { day: 9, title: 'Prep Gingerbread', description: 'Mix, roll, and bake gingerbread dough.', implemented: false },
+  { day: 10, title: 'Build Gingerbread House', description: 'Assemble the walls, roof, and icing of your gingerbread house.', implemented: false },
+  { day: 11, title: 'Build Snowman', description: 'Drag and stack snowballs in the yard to build a snowman.', implemented: false },
+  { day: 12, title: 'Dress the Snowman', description: 'Add a scarf, carrot nose, buttons, and top hat.', implemented: false },
+  { day: 13, title: 'String Outdoor Lights', description: 'Connect twinkling holiday lights along the roofline.', implemented: false },
+  { day: 14, title: 'Winter Bird Feeder', description: 'Assemble a wooden feeder and scatter seeds to welcome a winter robin.', implemented: false },
+  { day: 15, title: 'Display Gingerbread House', description: 'Place your glowing gingerbread house onto the centerpiece table.', implemented: false },
+  { day: 16, title: 'Decorate Cookies', description: 'Pipe frosting and sprinkles onto star and tree cookies.', implemented: false },
+  { day: 17, title: 'Wrap Presents', description: 'Cut paper, fold corners, and tie ribbons for gifts under the tree.', implemented: false },
+  { day: 18, title: 'Holiday Wish Letter', description: 'Write a wish list, fold it into an envelope, and tuck it on the mantle.', implemented: false },
+  { day: 19, title: 'Hang Stockings', description: 'Customize patterns and initials on stockings for the fireplace.', implemented: false },
+  { day: 20, title: 'Repair Music Box', description: 'Assemble three interlocking gears to unlock a holiday melody.', implemented: false },
+  { day: 21, title: 'Light Outdoor Lanterns', description: 'Light the pathway lanterns to guide Santa’s sleigh.', implemented: false },
+  { day: 22, title: 'Prep Eggnog', description: 'Whisk and spice a cozy batch of holiday eggnog.', implemented: false },
+  { day: 23, title: 'Milk by the Hearth', description: 'Place a glass of milk next to the cookies for Santa.', implemented: false },
+  { day: 24, title: 'Place the Tree Star', description: 'Guide the glowing star to the very top of the Christmas tree.', implemented: false },
+];
