@@ -64,6 +64,11 @@ export interface Day7State {
   intensity: 'cozy' | 'roaring';
 }
 
+export interface Day8State {
+  startedAt: string;
+  intensity: 'gentle' | 'flurry' | 'blizzard';
+}
+
 export interface CalendarProgress {
   completedDays: number[];
   day1?: Day1State;
@@ -73,4 +78,5 @@ export interface CalendarProgress {
   day5?: Day5State;
   day6?: Day6State;
   day7?: Day7State;
+  day8?: Day8State;
 }

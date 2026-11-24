@@ -13,6 +13,7 @@ export function EvolvingWallpaper({ progress }: EvolvingWallpaperProps) {
   const hasDay5 = progress.completedDays.includes(5);
   const hasDay6 = progress.completedDays.includes(6);
   const hasDay7 = progress.completedDays.includes(7);
+  const hasDay8 = progress.completedDays.includes(8);
   const treeColors =
     progress.day1?.treeVariant === 'spruce'
       ? { dark: '#18423e', mid: '#215853', light: '#2d756e' }
@@ -31,6 +32,9 @@ export function EvolvingWallpaper({ progress }: EvolvingWallpaperProps) {
         ? '#7a1f26'
         : '#f4ece0';
   const fireRoaring = progress.day7?.intensity === 'roaring';
+  const snowIntensity = progress.day8?.intensity ?? 'flurry';
+  const windowFlakeCount = snowIntensity === 'blizzard' ? 56 : snowIntensity === 'gentle' ? 22 : 36;
+  const ambientFlakeCount = snowIntensity === 'blizzard' ? 30 : snowIntensity === 'gentle' ? 12 : 20;
 
   return (
     <div className="wallpaper-layer" aria-hidden="true">
@@ -82,6 +86,9 @@ export function EvolvingWallpaper({ progress }: EvolvingWallpaperProps) {
             <stop offset="0%" stopColor="#ff9e1f" />
             <stop offset="100%" stopColor="#fff3b0" />
           </linearGradient>
+          <clipPath id="windowSnowClip">
+            <rect x="830" y="100" width="680" height="470" />
+          </clipPath>
         </defs>
 
         {/* Outdoor Winter Sky (visible through panoramic cabin window) */}
@@ -144,6 +151,33 @@ export function EvolvingWallpaper({ progress }: EvolvingWallpaperProps) {
             <rect x="1122" y="475" width="16" height="40" fill="#4f311d" />
             <polygon points="1130,335 1085,435 1175,435" fill="#1e4937" />
             <polygon points="1130,380 1075,485 1185,485" fill="#235540" />
+          </g>
+        )}
+
+        {/* Day 8 Evolution: Outdoor Snowfall Seen Through Cabin Window */}
+        {hasDay8 && (
+          <g id="day8-window-snow" clipPath="url(#windowSnowClip)" fill="#ffffff">
+            {Array.from({ length: windowFlakeCount }, (_, i) => {
+              const cx = 835 + ((i * 73 + 19) % 670);
+              const r = 1.8 + (i % 4) * 0.9;
+              const speedBase = snowIntensity === 'blizzard' ? 3.8 : snowIntensity === 'gentle' ? 7.2 : 5.4;
+              const dur = (speedBase + (i % 5) * 0.85).toFixed(2);
+              const delay = (-((i * 0.57) % 6)).toFixed(2);
+              return (
+                <circle
+                  key={`ws-${i}`}
+                  cx={cx}
+                  cy={90}
+                  r={r}
+                  opacity={0.55 + (i % 4) * 0.11}
+                  className="snow-flake-window"
+                  style={{
+                    animationDuration: `${dur}s`,
+                    animationDelay: `${delay}s`,
+                  }}
+                />
+              );
+            })}
           </g>
         )}
 
@@ -461,6 +495,32 @@ export function EvolvingWallpaper({ progress }: EvolvingWallpaperProps) {
             className="fire-glow-pulse"
             style={{ pointerEvents: 'none' }}
           />
+        )}
+
+        {/* Day 8 Evolution: Gentle Ambient Snow Drift Across Calendar */}
+        {hasDay8 && (
+          <g id="day8-ambient-snow" fill="#ffffff" style={{ pointerEvents: 'none' }}>
+            {Array.from({ length: ambientFlakeCount }, (_, i) => {
+              const cx = 40 + ((i * 137 + 29) % 1520);
+              const r = 1.6 + (i % 3) * 0.85;
+              const dur = (8.5 + (i % 5) * 1.4).toFixed(2);
+              const delay = (-((i * 0.91) % 9)).toFixed(2);
+              return (
+                <circle
+                  key={`as-${i}`}
+                  cx={cx}
+                  cy={-12}
+                  r={r}
+                  opacity={0.22 + (i % 3) * 0.09}
+                  className="snow-flake-ambient"
+                  style={{
+                    animationDuration: `${dur}s`,
+                    animationDelay: `${delay}s`,
+                  }}
+                />
+              );
+            })}
+          </g>
         )}
       </svg>
     </div>
