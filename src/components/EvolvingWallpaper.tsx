@@ -23,6 +23,7 @@ export function EvolvingWallpaper({ progress }: EvolvingWallpaperProps) {
   const hasDay13 = progress.completedDays.includes(13);
   const hasDay14 = progress.completedDays.includes(14);
   const hasDay15 = progress.completedDays.includes(15);
+  const hasDay16 = progress.completedDays.includes(16);
   const treeColors =
     progress.day1?.treeVariant === 'spruce'
       ? { dark: '#18423e', mid: '#215853', light: '#2d756e' }
@@ -528,6 +529,33 @@ export function EvolvingWallpaper({ progress }: EvolvingWallpaperProps) {
                   glowingWindows
                 />
               </g>
+            </g>
+          )}
+
+          {/* Day 16 Evolution: Permanent Plate of Star & Tree Cookies on Table by the Hearth */}
+          {hasDay16 && (
+            <g id="day16-cookie-plate" transform="translate(684, 558)">
+              {/* Ceramic Holiday Plate */}
+              <ellipse cx="32" cy="14" rx="30" ry="7" fill="#f8fafc" stroke="#c92a35" strokeWidth="2" />
+              <ellipse cx="32" cy="13" rx="22" ry="4.5" fill="none" stroke="#f0c674" strokeWidth="1" />
+              {/* Mini Star Cookie */}
+              <polygon
+                points="20,1 23,7 30,7 24,11 26,17 20,13 14,17 16,11 10,7 17,7"
+                fill={progress.day16?.starFrosting ?? '#f5c542'}
+                stroke="#a87439"
+                strokeWidth="1.2"
+              />
+              {/* Mini Tree Cookie */}
+              <polygon
+                points="44,0 35,14 53,14"
+                fill={progress.day16?.treeFrosting ?? '#2d8659'}
+                stroke="#a87439"
+                strokeWidth="1.2"
+              />
+              {/* Tiny Sprinkles */}
+              <circle cx="20" cy="8" r="1.2" fill="#ef4444" />
+              <circle cx="44" cy="8" r="1.2" fill="#f0c674" />
+              <circle cx="41" cy="11" r="1.1" fill="#ef4444" />
             </g>
           )}
         </g>

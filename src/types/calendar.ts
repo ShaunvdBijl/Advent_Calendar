@@ -106,6 +106,13 @@ export interface Day15State {
   placement: 'windowsill' | 'centerpiece-table';
 }
 
+export interface Day16State {
+  decoratedAt: string;
+  starFrosting: string;
+  treeFrosting: string;
+  sprinkleStyle: 'festive-red-green' | 'gold-stars' | 'winter-frost';
+}
+
 export interface CalendarProgress {
   completedDays: number[];
   day1?: Day1State;
@@ -123,4 +130,5 @@ export interface CalendarProgress {
   day13?: Day13State;
   day14?: Day14State;
   day15?: Day15State;
+  day16?: Day16State;
 }
