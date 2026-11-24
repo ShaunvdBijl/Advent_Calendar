@@ -16,8 +16,25 @@ export interface Day2State {
   heightScale: 'cozy' | 'tall';
 }
 
+export interface TreeOrnament {
+  id: string;
+  /** Normalized horizontal offset from tree center (-1..1 relative to max half-width) */
+  nx: number;
+  /** Normalized vertical position from tree apex (0) to base (1) */
+  ny: number;
+  color: string;
+  kind: 'bauble' | 'candy-cane' | 'bell';
+}
+
+export interface Day3State {
+  decoratedAt: string;
+  garlandStyle: 'none' | 'gold-tinsel' | 'warm-lights' | 'red-ribbon';
+  ornaments: TreeOrnament[];
+}
+
 export interface CalendarProgress {
   completedDays: number[];
   day1?: Day1State;
   day2?: Day2State;
+  day3?: Day3State;
 }
