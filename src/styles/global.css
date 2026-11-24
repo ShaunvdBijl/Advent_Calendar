@@ -718,3 +718,28 @@ dialog.day-dialog::backdrop {
 .snow-flake-ambient {
   animation: snowFallAmbient 10s linear infinite;
 }
+
+/* Day 9: Prep Gingerbread */
+.day9-container {
+  display: flex;
+  flex-direction: column;
+  gap: 0.9rem;
+}
+
+@keyframes steamRise {
+  0% {
+    transform: translateY(6px);
+    opacity: 0;
+  }
+  40% {
+    opacity: 0.75;
+  }
+  100% {
+    transform: translateY(-14px);
+    opacity: 0;
+  }
+}
+
+.steam-rise {
+  animation: steamRise 2.4s ease-out infinite;
+}

@@ -69,6 +69,11 @@ export interface Day8State {
   intensity: 'gentle' | 'flurry' | 'blizzard';
 }
 
+export interface Day9State {
+  preppedAt: string;
+  spiceBlend: 'classic-ginger' | 'dark-molasses' | 'honey-cinnamon';
+}
+
 export interface CalendarProgress {
   completedDays: number[];
   day1?: Day1State;
@@ -79,4 +84,5 @@ export interface CalendarProgress {
   day6?: Day6State;
   day7?: Day7State;
   day8?: Day8State;
+  day9?: Day9State;
 }

@@ -14,6 +14,8 @@ export function EvolvingWallpaper({ progress }: EvolvingWallpaperProps) {
   const hasDay6 = progress.completedDays.includes(6);
   const hasDay7 = progress.completedDays.includes(7);
   const hasDay8 = progress.completedDays.includes(8);
+  const hasDay9 = progress.completedDays.includes(9);
+  const hasDay10 = progress.completedDays.includes(10);
   const treeColors =
     progress.day1?.treeVariant === 'spruce'
       ? { dark: '#18423e', mid: '#215853', light: '#2d756e' }
@@ -35,6 +37,12 @@ export function EvolvingWallpaper({ progress }: EvolvingWallpaperProps) {
   const snowIntensity = progress.day8?.intensity ?? 'flurry';
   const windowFlakeCount = snowIntensity === 'blizzard' ? 56 : snowIntensity === 'gentle' ? 22 : 36;
   const ambientFlakeCount = snowIntensity === 'blizzard' ? 30 : snowIntensity === 'gentle' ? 12 : 20;
+  const gingerBakedColor =
+    progress.day9?.spiceBlend === 'dark-molasses'
+      ? '#693a1b'
+      : progress.day9?.spiceBlend === 'honey-cinnamon'
+        ? '#b57638'
+        : '#9c5f2f';
 
   return (
     <div className="wallpaper-layer" aria-hidden="true">
@@ -353,6 +361,21 @@ export function EvolvingWallpaper({ progress }: EvolvingWallpaperProps) {
                 /* Tiny charcoal pencil resting on table */
                 <line x1="68" y1="62" x2="96" y2="57" stroke="#23201c" strokeWidth="3" strokeLinecap="round" />
               )}
+            </g>
+          )}
+
+          {/* Day 9 Evolution: Freshly Baked Gingerbread Panels Cooling on Side Table */}
+          {hasDay9 && !hasDay10 && (
+            <g id="day9-gingerbread-tray" transform="translate(686, 548)">
+              {/* Cooling baking sheet */}
+              <rect x="0" y="18" width="102" height="9" rx="3" fill="#4a5568" stroke="#94a3b8" strokeWidth="1.2" />
+              {/* Stacked gingerbread panels */}
+              <polygon points="24,4 8,18 40,18" fill={gingerBakedColor} stroke="#522c12" strokeWidth="1.2" />
+              <rect x="44" y="8" width="24" height="10" rx="1.5" fill={gingerBakedColor} stroke="#522c12" strokeWidth="1.2" />
+              <rect x="72" y="10" width="22" height="8" rx="1.5" fill={gingerBakedColor} stroke="#522c12" strokeWidth="1.2" />
+              {/* Subtle warm baking steam */}
+              <path d="M 28 2 Q 24 -6 30 -12" fill="none" stroke="#ffe7c2" strokeWidth="1.8" strokeLinecap="round" className="steam-rise" />
+              <path d="M 68 4 Q 64 -4 70 -10" fill="none" stroke="#ffe7c2" strokeWidth="1.8" strokeLinecap="round" className="steam-rise" style={{ animationDelay: '0.7s' }} />
             </g>
           )}
         </g>
