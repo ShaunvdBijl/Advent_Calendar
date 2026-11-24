@@ -6,6 +6,12 @@ interface EvolvingWallpaperProps {
 
 export function EvolvingWallpaper({ progress }: EvolvingWallpaperProps) {
   const hasDay1 = progress.completedDays.includes(1);
+  const treeColors =
+    progress.day1?.treeVariant === 'spruce'
+      ? { dark: '#1c4b47', light: '#2a6b65' }
+      : progress.day1?.treeVariant === 'fir'
+        ? { dark: '#173d2e', light: '#215742' }
+        : { dark: '#1e4932', light: '#2a6345' };
 
   return (
     <div className="wallpaper-layer" aria-hidden="true">
@@ -83,8 +89,8 @@ export function EvolvingWallpaper({ progress }: EvolvingWallpaperProps) {
             {/* Cut pine tree resting on sled/porch ready to bring inside on Day 2 */}
             <g transform="translate(970, 505)">
               <rect x="0" y="14" width="120" height="8" rx="3" fill="#6b4226" />
-              <polygon points="20,14 95,-12 95,40" fill="#214e3a" />
-              <polygon points="55,14 130,-18 130,46" fill="#285e46" />
+              <polygon points="20,14 95,-12 95,40" fill={treeColors.dark} />
+              <polygon points="55,14 130,-18 130,46" fill={treeColors.light} />
             </g>
           </g>
         ) : (

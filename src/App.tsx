@@ -2,7 +2,8 @@ import { useEffect, useState } from 'react';
 import { DayGrid } from './components/DayGrid';
 import { DayModal } from './components/DayModal';
 import { EvolvingWallpaper } from './components/EvolvingWallpaper';
-import type { CalendarProgress, DayMeta } from './types/calendar';
+import { Day01ChopTree } from './days/Day01ChopTree';
+import type { CalendarProgress, Day1State, DayMeta } from './types/calendar';
 
 const STORAGE_KEY = 'advent-calendar-2026-progress';
 
@@ -37,6 +38,17 @@ export function App() {
 
   const handleReset = () => {
     setProgress(DEFAULT_PROGRESS);
+    setActiveDay(null);
+  };
+
+  const completeDay1 = (day1State: Day1State) => {
+    setProgress((prev) => ({
+      ...prev,
+      completedDays: prev.completedDays.includes(1)
+        ? prev.completedDays
+        : [...prev.completedDays, 1].sort((a, b) => a - b),
+      day1: day1State,
+    }));
     setActiveDay(null);
   };
 
@@ -84,7 +96,11 @@ export function App() {
       </main>
 
       <DayModal day={activeDay} onClose={() => setActiveDay(null)}>
-        {activeDay && <p>{activeDay.description}</p>}
+        {activeDay?.day === 1 ? (
+          <Day01ChopTree existingState={progress.day1} onComplete={completeDay1} />
+        ) : (
+          activeDay && <p>{activeDay.description}</p>
+        )}
       </DayModal>
     </div>
   );

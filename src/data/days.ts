@@ -1,7 +1,7 @@
 import type { DayMeta } from '../types/calendar';
 
 export const ADVENT_DAYS: DayMeta[] = [
-  { day: 1, title: 'Chop Down Tree', description: 'Venture into the snowy woods and chop down your Christmas tree.', implemented: false },
+  { day: 1, title: 'Chop Down Tree', description: 'Venture into the snowy woods and chop down your Christmas tree.', implemented: true },
   { day: 2, title: 'Build Tree', description: 'Set up and assemble your freshly cut tree in the living room.', implemented: false },
   { day: 3, title: 'Ornaments & Decorations', description: 'Hang baubles, tinsel, and garlands on the tree.', implemented: false },
   { day: 4, title: 'Draw Christmas Photo', description: 'Sketch a festive holiday drawing.', implemented: false },
