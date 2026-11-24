@@ -9,7 +9,7 @@ npm install
 npm run dev
 ```
 
-Open the local Vite URL (default `http://localhost:5173`). Days unlock automatically at **00:01 SAST (`Africa/Johannesburg`)** starting **December 1, 2026**. Use **View Wallpaper** in the top bar to hide the 24-day grid and admire your evolving scene, or **Preview All Days** to test any day ahead of schedule.
+Open the local Vite URL (default `http://localhost:5173`). Days unlock automatically at **00:01 SAST (`Africa/Johannesburg`)** starting **December 1, 2026**. Use **View Wallpaper** in the top bar to hide the 24-day grid and admire your evolving scene.
 
 ## All 24 Days
 1. **Chop Down Tree** — Pick a species and chop down your tree in the snowy woods.

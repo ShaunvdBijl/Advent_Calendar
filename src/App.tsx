@@ -83,7 +83,6 @@ export function App() {
   const [progress, setProgress] = useState<CalendarProgress>(loadProgress);
   const [activeDay, setActiveDay] = useState<DayMeta | null>(null);
   const [hideGrid, setHideGrid] = useState(false);
-  const [unlockAll, setUnlockAll] = useState(false);
   const [musicPlaying, setMusicPlaying] = useState(false);
   const [schedule, setSchedule] = useState<ScheduleSnapshot | null>(null);
 
@@ -420,7 +419,7 @@ export function App() {
           <span className="progress-pill">
             {progress.completedDays.length} / 24 Days Complete
           </span>
-          {schedule && !unlockAll && (
+          {schedule && (
             <span className="schedule-pill">
               {schedule.nextUnlockDay !== null && schedule.nextUnlockCountdown
                 ? `Day ${schedule.nextUnlockDay} unlocks in ${schedule.nextUnlockCountdown} (00:01 SAST)`
@@ -453,14 +452,6 @@ export function App() {
           >
             {hideGrid ? 'Show Calendar' : 'View Wallpaper'}
           </button>
-          <button
-            type="button"
-            className="toolbar-btn"
-            aria-pressed={unlockAll}
-            onClick={() => setUnlockAll((v) => !v)}
-          >
-            {unlockAll ? 'SAST Schedule' : 'Preview All Days'}
-          </button>
           <button type="button" className="toolbar-btn" onClick={handleReset}>
             Reset Progress
           </button>
@@ -471,7 +462,6 @@ export function App() {
         <DayGrid
           progress={progress}
           schedule={schedule}
-          unlockAll={unlockAll}
           onSelectDay={setActiveDay}
         />
       </main>
