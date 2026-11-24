@@ -113,6 +113,11 @@ export function EvolvingWallpaper({ progress }: EvolvingWallpaperProps) {
             <stop offset="0%" stopColor="#ff9e1f" />
             <stop offset="100%" stopColor="#fff3b0" />
           </linearGradient>
+          <radialGradient id="wpCandyGlow" cx="50%" cy="55%" r="50%">
+            <stop offset="0%" stopColor="#ffe07d" stopOpacity="0.45" />
+            <stop offset="60%" stopColor="#ffb347" stopOpacity="0.14" />
+            <stop offset="100%" stopColor="#ffb347" stopOpacity="0" />
+          </radialGradient>
           <clipPath id="windowSnowClip">
             <rect x="830" y="100" width="680" height="470" />
           </clipPath>
@@ -320,6 +325,22 @@ export function EvolvingWallpaper({ progress }: EvolvingWallpaperProps) {
         <line x1="830" y1="335" x2="1510" y2="335" stroke="#6b442a" strokeWidth="14" />
         <rect x="810" y="566" width="720" height="24" rx="4" fill="#7c4f31" />
 
+        {/* Day 15 Evolution: Glowing Gingerbread House on Windowsill */}
+        {hasDay15 && (progress.day15?.placement ?? 'windowsill') === 'windowsill' && (
+          <g id="day15-windowsill-gingerbread">
+            <circle cx="1392" cy="532" r="78" fill="url(#wpCandyGlow)" className="fire-glow-pulse" />
+            <g transform="translate(1332, 484) scale(0.58)">
+              <GingerbreadHouseArt
+                spiceBlend={progress.day9?.spiceBlend}
+                icingColor={progress.day10?.icingColor}
+                candyTheme={progress.day10?.candyTheme}
+                stage={4}
+                glowingWindows
+              />
+            </g>
+          </g>
+        )}
+
         {/* Stone Fireplace & Mantle (Left-Center) */}
         <g id="fireplace-base">
           <rect x="330" y="340" width="290" height="310" rx="6" fill="#525866" />
@@ -490,6 +511,23 @@ export function EvolvingWallpaper({ progress }: EvolvingWallpaperProps) {
                 stage={4}
                 glowingWindows={false}
               />
+            </g>
+          )}
+
+          {/* Day 15 Evolution: Glowing Gingerbread House on Centerpiece Table */}
+          {hasDay15 && progress.day15?.placement === 'centerpiece-table' && (
+            <g id="day15-table-gingerbread">
+              <rect x="682" y="572" width="111" height="7" rx="2" fill="#8f242c" stroke="#f0c674" strokeWidth="1.2" />
+              <circle cx="738" cy="540" r="74" fill="url(#wpCandyGlow)" className="fire-glow-pulse" />
+              <g transform="translate(684, 496) scale(0.54)">
+                <GingerbreadHouseArt
+                  spiceBlend={progress.day9?.spiceBlend}
+                  icingColor={progress.day10?.icingColor}
+                  candyTheme={progress.day10?.candyTheme}
+                  stage={4}
+                  glowingWindows
+                />
+              </g>
             </g>
           )}
         </g>

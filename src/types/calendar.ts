@@ -101,6 +101,11 @@ export interface Day14State {
   birdKind: 'red-robin' | 'snow-cardinal' | 'blue-jay';
 }
 
+export interface Day15State {
+  displayedAt: string;
+  placement: 'windowsill' | 'centerpiece-table';
+}
+
 export interface CalendarProgress {
   completedDays: number[];
   day1?: Day1State;
@@ -117,4 +122,5 @@ export interface CalendarProgress {
   day12?: Day12State;
   day13?: Day13State;
   day14?: Day14State;
+  day15?: Day15State;
 }
