@@ -21,6 +21,7 @@ export function EvolvingWallpaper({ progress }: EvolvingWallpaperProps) {
   const hasDay11 = progress.completedDays.includes(11);
   const hasDay12 = progress.completedDays.includes(12);
   const hasDay13 = progress.completedDays.includes(13);
+  const hasDay14 = progress.completedDays.includes(14);
   const hasDay15 = progress.completedDays.includes(15);
   const treeColors =
     progress.day1?.treeVariant === 'spruce'
@@ -55,6 +56,12 @@ export function EvolvingWallpaper({ progress }: EvolvingWallpaperProps) {
       : progress.day13?.palette === 'icicle-blue'
         ? ['#bae6fd', '#60a5fa', '#f8fafc']
         : ['#ef4444', '#facc15', '#22c55e', '#38bdf8'];
+  const yardBirdColors =
+    progress.day14?.birdKind === 'snow-cardinal'
+      ? { body: '#c92a35', breast: '#e03131', wing: '#9b1c26', crest: true }
+      : progress.day14?.birdKind === 'blue-jay'
+        ? { body: '#3b82f6', breast: '#e2e8f0', wing: '#1d4ed8', crest: true }
+        : { body: '#6b4c3b', breast: '#d94832', wing: '#4f372b', crest: false };
 
   return (
     <div className="wallpaper-layer" aria-hidden="true">
@@ -185,6 +192,36 @@ export function EvolvingWallpaper({ progress }: EvolvingWallpaperProps) {
               hasTopHat={hasDay12}
               hatBandColor={progress.day12?.hatBandColor ?? '#c92a35'}
             />
+          </g>
+        )}
+
+        {/* Day 14 Evolution: Wooden Bird Feeder & Visiting Winter Bird in Snowy Yard */}
+        {hasDay14 && (
+          <g id="day14-yard-bird-feeder" transform="translate(888, 434) scale(0.75)">
+            {/* Post & Tray */}
+            <rect x="46" y="72" width="12" height="72" rx="2" fill="#6b4426" />
+            <rect x="12" y="66" width="80" height="10" rx="3" fill="#8c5a34" />
+            {/* Pillars & Roof */}
+            <rect x="24" y="34" width="6" height="34" fill="#6b4426" />
+            <rect x="74" y="34" width="6" height="34" fill="#6b4426" />
+            <polygon points="4,38 52,8 100,38" fill="#7a4827" />
+            <path d="M 4 38 L 52 8 L 100 38 L 93 41 L 52 15 L 11 41 Z" fill="#e6f1fc" />
+            {/* Seeds */}
+            <ellipse cx="36" cy="64" rx="3" ry="1.5" fill="#e6b85c" />
+            <ellipse cx="52" cy="63" rx="3" ry="1.5" fill="#f0c674" />
+            <ellipse cx="66" cy="64" rx="3" ry="1.5" fill="#c9933b" />
+            {/* Visiting Bird */}
+            <g transform="translate(52, 52)">
+              <g className="yard-bird-bob">
+                <polygon points="-10,3 -22,7 -19,-1" fill={yardBirdColors.wing} />
+                <ellipse cx="0" cy="0" rx="12" ry="9" fill={yardBirdColors.body} />
+                <ellipse cx="4" cy="2" rx="7.5" ry="6" fill={yardBirdColors.breast} />
+                <circle cx="8" cy="-7" r="6.5" fill={yardBirdColors.body} />
+                {yardBirdColors.crest && <polygon points="6,-12 10,-18 12,-10" fill={yardBirdColors.body} />}
+                <circle cx="10.5" cy="-7.5" r="1.3" fill="#0f172a" />
+                <polygon points="14,-7 20,-5.5 14,-4" fill="#f59e0b" />
+              </g>
+            </g>
           </g>
         )}
 
