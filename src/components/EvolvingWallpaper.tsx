@@ -7,6 +7,7 @@ interface EvolvingWallpaperProps {
 export function EvolvingWallpaper({ progress }: EvolvingWallpaperProps) {
   const hasDay1 = progress.completedDays.includes(1);
   const hasDay2 = progress.completedDays.includes(2);
+  const hasDay3 = progress.completedDays.includes(3);
   const treeColors =
     progress.day1?.treeVariant === 'spruce'
       ? { dark: '#18423e', mid: '#215853', light: '#2d756e' }
@@ -15,6 +16,8 @@ export function EvolvingWallpaper({ progress }: EvolvingWallpaperProps) {
         : { dark: '#1a422c', mid: '#24593c', light: '#2f724d' };
   const standStyle = progress.day2?.standStyle ?? 'classic-red';
   const treeScaleY = progress.day2?.heightScale === 'cozy' ? 0.92 : 1.05;
+  const garlandStyle = progress.day3?.garlandStyle ?? 'none';
+  const ornaments = progress.day3?.ornaments ?? [];
 
   return (
     <div className="wallpaper-layer" aria-hidden="true">
@@ -190,6 +193,94 @@ export function EvolvingWallpaper({ progress }: EvolvingWallpaperProps) {
               <polygon points="165,380 68,575 262,575" fill={treeColors.mid} />
               <polygon points="165,295 92,472 238,472" fill={treeColors.light} />
               <polygon points="165,220 116,356 214,356" fill={treeColors.mid} />
+
+              {/* Day 3 Evolution: Garland & Ornaments on Indoor Tree */}
+              {hasDay3 && (
+                <g id="day3-tree-decorations">
+                  {garlandStyle === 'gold-tinsel' && (
+                    <g fill="none" stroke="#f0c674" strokeWidth="6" strokeDasharray="8 5" opacity="0.9">
+                      <path d="M 124 335 Q 165 362 206 338" />
+                      <path d="M 98 446 Q 165 480 232 450" />
+                      <path d="M 74 550 Q 165 592 256 554" />
+                      <path d="M 56 644 Q 165 676 274 646" />
+                    </g>
+                  )}
+                  {garlandStyle === 'red-ribbon' && (
+                    <g fill="none" stroke="#c92a35" strokeWidth="7" strokeLinecap="round" opacity="0.92">
+                      <path d="M 124 335 Q 165 364 206 338" />
+                      <path d="M 98 446 Q 165 482 232 450" />
+                      <path d="M 74 550 Q 165 594 256 554" />
+                      <path d="M 56 644 Q 165 678 274 646" />
+                    </g>
+                  )}
+                  {garlandStyle === 'warm-lights' && (
+                    <g>
+                      <g fill="none" stroke="#2c4536" strokeWidth="2" opacity="0.65">
+                        <path d="M 124 335 Q 165 362 206 338" />
+                        <path d="M 98 446 Q 165 480 232 450" />
+                        <path d="M 74 550 Q 165 592 256 554" />
+                        <path d="M 56 644 Q 165 676 274 646" />
+                      </g>
+                      {[
+                        [134, 342], [156, 349], [178, 349], [198, 342],
+                        [112, 454], [140, 464], [168, 467], [196, 463], [222, 455],
+                        [90, 560], [124, 572], [165, 576], [206, 572], [240, 561],
+                        [74, 650], [116, 661], [165, 664], [214, 661], [256, 650],
+                      ].map(([lx, ly], idx) => (
+                        <circle
+                          key={`${lx}-${ly}`}
+                          cx={lx}
+                          cy={ly}
+                          r="4.5"
+                          fill={idx % 2 === 0 ? '#ffe79e' : '#ffbe55'}
+                          className={idx % 2 === 0 ? 'twinkle-a' : 'twinkle-b'}
+                        />
+                      ))}
+                    </g>
+                  )}
+
+                  {ornaments.map((orn) => {
+                    const wx = 165 + orn.nx * 119;
+                    const wy = 220 + orn.ny * 448;
+                    return (
+                      <g key={orn.id} transform={`translate(${wx}, ${wy})`}>
+                        {orn.kind === 'bauble' && (
+                          <>
+                            <rect x="-3" y="-13" width="6" height="4" fill="#e6c373" />
+                            <circle r="9.5" fill={orn.color} stroke="rgba(255,255,255,0.35)" strokeWidth="1.5" />
+                            <circle cx="-3" cy="-3" r="2.6" fill="rgba(255,255,255,0.55)" />
+                          </>
+                        )}
+                        {orn.kind === 'bell' && (
+                          <>
+                            <path d="M -7 7 L -4 -7 Q 0 -11 4 -7 L 7 7 Z" fill="#f0c674" stroke="#9e7424" strokeWidth="1.5" />
+                            <circle cx="0" cy="8.5" r="2.5" fill="#b4832b" />
+                          </>
+                        )}
+                        {orn.kind === 'candy-cane' && (
+                          <>
+                            <path
+                              d="M -3 10 L -3 -4 A 5 5 0 0 1 7 -4"
+                              fill="none"
+                              stroke="#ffffff"
+                              strokeWidth="4.2"
+                              strokeLinecap="round"
+                            />
+                            <path
+                              d="M -3 10 L -3 -4 A 5 5 0 0 1 7 -4"
+                              fill="none"
+                              stroke="#d63638"
+                              strokeWidth="4.2"
+                              strokeDasharray="3.5 3.5"
+                              strokeLinecap="round"
+                            />
+                          </>
+                        )}
+                      </g>
+                    );
+                  })}
+                </g>
+              )}
             </g>
           </g>
         )}
