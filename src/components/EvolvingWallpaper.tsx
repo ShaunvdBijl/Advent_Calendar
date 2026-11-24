@@ -6,12 +6,15 @@ interface EvolvingWallpaperProps {
 
 export function EvolvingWallpaper({ progress }: EvolvingWallpaperProps) {
   const hasDay1 = progress.completedDays.includes(1);
+  const hasDay2 = progress.completedDays.includes(2);
   const treeColors =
     progress.day1?.treeVariant === 'spruce'
-      ? { dark: '#1c4b47', light: '#2a6b65' }
+      ? { dark: '#18423e', mid: '#215853', light: '#2d756e' }
       : progress.day1?.treeVariant === 'fir'
-        ? { dark: '#173d2e', light: '#215742' }
-        : { dark: '#1e4932', light: '#2a6345' };
+        ? { dark: '#143628', mid: '#1d4c39', light: '#26634b' }
+        : { dark: '#1a422c', mid: '#24593c', light: '#2f724d' };
+  const standStyle = progress.day2?.standStyle ?? 'classic-red';
+  const treeScaleY = progress.day2?.heightScale === 'cozy' ? 0.92 : 1.05;
 
   return (
     <div className="wallpaper-layer" aria-hidden="true">
@@ -86,12 +89,14 @@ export function EvolvingWallpaper({ progress }: EvolvingWallpaperProps) {
             {/* Woodchips on snow */}
             <ellipse cx="1102" cy="516" rx="5" ry="2" fill="#d9b482" />
             <ellipse cx="1158" cy="514" rx="4" ry="2" fill="#c99b63" />
-            {/* Cut pine tree resting on sled/porch ready to bring inside on Day 2 */}
-            <g transform="translate(970, 505)">
-              <rect x="0" y="14" width="120" height="8" rx="3" fill="#6b4226" />
-              <polygon points="20,14 95,-12 95,40" fill={treeColors.dark} />
-              <polygon points="55,14 130,-18 130,46" fill={treeColors.light} />
-            </g>
+            {/* Cut pine tree resting on sled/porch until brought inside on Day 2 */}
+            {!hasDay2 && (
+              <g transform="translate(970, 505)">
+                <rect x="0" y="14" width="120" height="8" rx="3" fill="#6b4226" />
+                <polygon points="20,14 95,-12 95,40" fill={treeColors.dark} />
+                <polygon points="55,14 130,-18 130,46" fill={treeColors.light} />
+              </g>
+            )}
           </g>
         ) : (
           <g id="day1-standing-tree">
@@ -151,6 +156,43 @@ export function EvolvingWallpaper({ progress }: EvolvingWallpaperProps) {
 
         {/* Tree Rug / Corner Stand (Far Left) */}
         <ellipse cx="165" cy="705" rx="125" ry="34" fill="#7c262d" stroke="#d9b166" strokeWidth="4" />
+
+        {/* Day 2 Evolution: Assembled Christmas Tree in Living Room */}
+        {hasDay2 && (
+          <g id="day2-indoor-tree">
+            {/* Trunk */}
+            <rect x="153" y="590" width="24" height="105" rx="4" fill="#5c3a21" />
+
+            {/* Chosen Stand */}
+            {standStyle === 'classic-red' && (
+              <g>
+                <path d="M 130 704 L 143 670 L 187 670 L 200 704 Z" fill="#a8262d" />
+                <rect x="139" y="666" width="52" height="7" rx="2" fill="#e6b95c" />
+              </g>
+            )}
+            {standStyle === 'wooden-barrel' && (
+              <g>
+                <path d="M 132 704 L 138 666 L 192 666 L 198 704 Z" fill="#7c4f31" />
+                <line x1="136" y1="678" x2="194" y2="678" stroke="#3c2a1e" strokeWidth="4" />
+                <line x1="134" y1="693" x2="196" y2="693" stroke="#3c2a1e" strokeWidth="4" />
+              </g>
+            )}
+            {standStyle === 'gold-pot' && (
+              <g>
+                <path d="M 134 704 L 128 668 L 202 668 L 196 704 Z" fill="#cfa047" />
+                <rect x="124" y="663" width="82" height="8" rx="3" fill="#f0c674" />
+              </g>
+            )}
+
+            {/* Multi-tiered Evergreen Foliage */}
+            <g transform={`translate(165 668) scale(1 ${treeScaleY}) translate(-165 -668)`}>
+              <polygon points="165,470 46,668 284,668" fill={treeColors.dark} />
+              <polygon points="165,380 68,575 262,575" fill={treeColors.mid} />
+              <polygon points="165,295 92,472 238,472" fill={treeColors.light} />
+              <polygon points="165,220 116,356 214,356" fill={treeColors.mid} />
+            </g>
+          </g>
+        )}
       </svg>
     </div>
   );

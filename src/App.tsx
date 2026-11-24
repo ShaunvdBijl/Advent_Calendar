@@ -3,7 +3,8 @@ import { DayGrid } from './components/DayGrid';
 import { DayModal } from './components/DayModal';
 import { EvolvingWallpaper } from './components/EvolvingWallpaper';
 import { Day01ChopTree } from './days/Day01ChopTree';
-import type { CalendarProgress, Day1State, DayMeta } from './types/calendar';
+import { Day02BuildTree } from './days/Day02BuildTree';
+import type { CalendarProgress, Day1State, Day2State, DayMeta } from './types/calendar';
 
 const STORAGE_KEY = 'advent-calendar-2026-progress';
 
@@ -48,6 +49,17 @@ export function App() {
         ? prev.completedDays
         : [...prev.completedDays, 1].sort((a, b) => a - b),
       day1: day1State,
+    }));
+    setActiveDay(null);
+  };
+
+  const completeDay2 = (day2State: Day2State) => {
+    setProgress((prev) => ({
+      ...prev,
+      completedDays: prev.completedDays.includes(2)
+        ? prev.completedDays
+        : [...prev.completedDays, 2].sort((a, b) => a - b),
+      day2: day2State,
     }));
     setActiveDay(null);
   };
@@ -98,6 +110,12 @@ export function App() {
       <DayModal day={activeDay} onClose={() => setActiveDay(null)}>
         {activeDay?.day === 1 ? (
           <Day01ChopTree existingState={progress.day1} onComplete={completeDay1} />
+        ) : activeDay?.day === 2 ? (
+          <Day02BuildTree
+            treeVariant={progress.day1?.treeVariant}
+            existingState={progress.day2}
+            onComplete={completeDay2}
+          />
         ) : (
           activeDay && <p>{activeDay.description}</p>
         )}
