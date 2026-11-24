@@ -17,7 +17,7 @@ export const ADVENT_DAYS: DayMeta[] = [
   { day: 14, title: 'Winter Bird Feeder', description: 'Assemble a wooden feeder and scatter seeds to welcome a winter robin.', implemented: true },
   { day: 15, title: 'Display Gingerbread House', description: 'Place your glowing gingerbread house onto the centerpiece table.', implemented: true },
   { day: 16, title: 'Decorate Cookies', description: 'Pipe frosting and sprinkles onto star and tree cookies.', implemented: true },
-  { day: 17, title: 'Wrap Presents', description: 'Cut paper, fold corners, and tie ribbons for gifts under the tree.', implemented: false },
+  { day: 17, title: 'Wrap Presents', description: 'Cut paper, fold corners, and tie ribbons for gifts under the tree.', implemented: true },
   { day: 18, title: 'Holiday Wish Letter', description: 'Write a wish list, fold it into an envelope, and tuck it on the mantle.', implemented: false },
   { day: 19, title: 'Hang Stockings', description: 'Customize patterns and initials on stockings for the fireplace.', implemented: false },
   { day: 20, title: 'Repair Music Box', description: 'Assemble three interlocking gears to unlock a holiday melody.', implemented: false },

@@ -24,6 +24,7 @@ export function EvolvingWallpaper({ progress }: EvolvingWallpaperProps) {
   const hasDay14 = progress.completedDays.includes(14);
   const hasDay15 = progress.completedDays.includes(15);
   const hasDay16 = progress.completedDays.includes(16);
+  const hasDay17 = progress.completedDays.includes(17);
   const treeColors =
     progress.day1?.treeVariant === 'spruce'
       ? { dark: '#18423e', mid: '#215853', light: '#2d756e' }
@@ -63,6 +64,13 @@ export function EvolvingWallpaper({ progress }: EvolvingWallpaperProps) {
       : progress.day14?.birdKind === 'blue-jay'
         ? { body: '#3b82f6', breast: '#e2e8f0', wing: '#1d4ed8', crest: true }
         : { body: '#6b4c3b', breast: '#d94832', wing: '#4f372b', crest: false };
+  const giftPaperFill =
+    progress.day17?.paperStyle === 'pine-stars'
+      ? '#1f5c3e'
+      : progress.day17?.paperStyle === 'midnight-gold'
+        ? '#1e3557'
+        : '#b82830';
+  const giftRibbonColor = progress.day17?.ribbonColor ?? '#f0c674';
 
   return (
     <div className="wallpaper-layer" aria-hidden="true">
@@ -687,6 +695,39 @@ export function EvolvingWallpaper({ progress }: EvolvingWallpaperProps) {
             </g>
           </g>
         )}
+        {/* Day 17 Evolution: Wrapped Gift Boxes Beneath Christmas Tree */}
+        {hasDay17 && (
+          <g id="day17-tree-gifts">
+            {/* Left Large Hero Gift (User's Paper & Ribbon) */}
+            <g transform="translate(64, 666)">
+              <rect x="0" y="8" width="66" height="44" rx="3" fill={giftPaperFill} stroke="#1a120d" strokeWidth="1.5" />
+              <rect x="-3" y="2" width="72" height="11" rx="2" fill={giftPaperFill} stroke="#1a120d" strokeWidth="1.5" />
+              <rect x="28" y="2" width="10" height="50" fill={giftRibbonColor} />
+              <rect x="0" y="25" width="66" height="8" fill={giftRibbonColor} />
+              <ellipse cx="26" cy="-1" rx="9" ry="5" fill={giftRibbonColor} transform="rotate(-18 26 -1)" />
+              <ellipse cx="40" cy="-1" rx="9" ry="5" fill={giftRibbonColor} transform="rotate(18 40 -1)" />
+            </g>
+
+            {/* Right Tall Companion Gift */}
+            <g transform="translate(208, 662)">
+              <rect x="0" y="8" width="54" height="48" rx="3" fill="#1f5c3e" stroke="#133d28" strokeWidth="1.5" />
+              <rect x="-2" y="2" width="58" height="10" rx="2" fill="#2c7a54" stroke="#133d28" strokeWidth="1.5" />
+              <rect x="22" y="2" width="9" height="54" fill="#f0c674" />
+              <ellipse cx="21" cy="-1" rx="8" ry="4.5" fill="#f0c674" transform="rotate(-16 21 -1)" />
+              <ellipse cx="32" cy="-1" rx="8" ry="4.5" fill="#f0c674" transform="rotate(16 32 -1)" />
+            </g>
+
+            {/* Front Center Small Gift */}
+            <g transform="translate(142, 684)">
+              <rect x="0" y="6" width="52" height="32" rx="3" fill="#1e3557" stroke="#12223a" strokeWidth="1.5" />
+              <rect x="-2" y="1" width="56" height="9" rx="2" fill="#2b4a78" stroke="#12223a" strokeWidth="1.5" />
+              <rect x="22" y="1" width="8" height="37" fill="#e03131" />
+              <ellipse cx="21" cy="-2" rx="7" ry="4" fill="#e03131" transform="rotate(-15 21 -2)" />
+              <ellipse cx="31" cy="-2" rx="7" ry="4" fill="#e03131" transform="rotate(15 31 -2)" />
+            </g>
+          </g>
+        )}
+
         {/* Day 7 Evolution: Warm Ambient Room Glow Cast Across Cabin */}
         {hasDay7 && (
           <rect
