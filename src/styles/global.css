@@ -531,3 +531,12 @@ dialog.day-dialog::backdrop {
 .photo-region-clickable {
   cursor: pointer;
 }
+
+/* Day 5: Colour in Photo */
+.color-swatches-wrap {
+  flex-wrap: wrap;
+}
+
+.fill-cursor {
+  cursor: pointer;
+}

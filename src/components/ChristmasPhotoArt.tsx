@@ -4,6 +4,7 @@ interface ChristmasPhotoArtProps {
   template: PhotoTemplate;
   strokes: PhotoStroke[];
   regionColors?: Record<string, string>;
+  colorStrokes?: PhotoStroke[];
   onRegionClick?: (regionId: string) => void;
 }
 
@@ -14,6 +15,7 @@ export function ChristmasPhotoArt({
   template,
   strokes,
   regionColors = {},
+  colorStrokes = [],
   onRegionClick,
 }: ChristmasPhotoArtProps) {
   const fillOf = (id: string) => regionColors[id] ?? DEFAULT_PAPER;
@@ -196,6 +198,18 @@ export function ChristmasPhotoArt({
           <line x1="184" y1="162" x2="184" y2="178" />
         </g>
       )}
+
+      {/* Day 5 Colored Brush Strokes (underneath Day 4 ink outlines) */}
+      <g fill="none" strokeLinecap="round" strokeLinejoin="round" opacity="0.88">
+        {colorStrokes.map((stroke) => (
+          <polyline
+            key={stroke.id}
+            points={stroke.points}
+            stroke={stroke.color}
+            strokeWidth={stroke.width}
+          />
+        ))}
+      </g>
 
       {/* User Freehand Ink Strokes */}
       <g fill="none" strokeLinecap="round" strokeLinejoin="round">
