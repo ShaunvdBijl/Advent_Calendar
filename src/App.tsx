@@ -22,6 +22,8 @@ import { ADVENT_DAYS } from './data/days';
 import { Day17WrapPresents } from './days/Day17WrapPresents';
 import { Day18WishLetter } from './days/Day18WishLetter';
 import { Day19Stockings } from './days/Day19Stockings';
+import { Day20MusicBox } from './days/Day20MusicBox';
+import { startMusicBox, stopMusicBox } from './utils/musicBoxAudio';
 import type {
   CalendarProgress,
   Day1State,
@@ -43,6 +45,7 @@ import type {
   Day17State,
   Day18State,
   Day19State,
+  Day20State,
   DayMeta,
 } from './types/calendar';
 
@@ -68,6 +71,13 @@ export function App() {
   const [activeDay, setActiveDay] = useState<DayMeta | null>(null);
   const [hideGrid, setHideGrid] = useState(false);
   const [unlockAll, setUnlockAll] = useState(false);
+  const [musicPlaying, setMusicPlaying] = useState(false);
+
+  useEffect(() => {
+    return () => {
+      stopMusicBox();
+    };
+  }, []);
 
   useEffect(() => {
     try {
@@ -78,6 +88,8 @@ export function App() {
   }, [progress]);
 
   const handleReset = () => {
+    stopMusicBox();
+    setMusicPlaying(false);
     setProgress(DEFAULT_PROGRESS);
     setActiveDay(null);
   };
@@ -291,6 +303,27 @@ export function App() {
     setActiveDay(null);
   };
 
+  const completeDay20 = (day20State: Day20State) => {
+    setProgress((prev) => ({
+      ...prev,
+      completedDays: prev.completedDays.includes(20)
+        ? prev.completedDays
+        : [...prev.completedDays, 20].sort((a, b) => a - b),
+      day20: day20State,
+    }));
+    setActiveDay(null);
+  };
+
+  const toggleMusic = () => {
+    if (musicPlaying) {
+      stopMusicBox();
+      setMusicPlaying(false);
+    } else {
+      startMusicBox(progress.day20?.melody ?? 'jingle-chimes');
+      setMusicPlaying(true);
+    }
+  };
+
   const openWishLetter = () => {
     const day18Meta = ADVENT_DAYS.find((d) => d.day === 18);
     if (day18Meta) setActiveDay(day18Meta);
@@ -298,7 +331,12 @@ export function App() {
 
   return (
     <div className="app-shell">
-      <EvolvingWallpaper progress={progress} onOpenWishLetter={openWishLetter} />
+      <EvolvingWallpaper
+        progress={progress}
+        onOpenWishLetter={openWishLetter}
+        musicPlaying={musicPlaying}
+        onToggleMusic={toggleMusic}
+      />
 
       <header className="top-bar">
         <div className="brand">
@@ -309,6 +347,16 @@ export function App() {
         </div>
 
         <div className="toolbar-actions">
+          {progress.completedDays.includes(20) && (
+            <button
+              type="button"
+              className="toolbar-btn"
+              aria-pressed={musicPlaying}
+              onClick={toggleMusic}
+            >
+              {musicPlaying ? '♫ Pause Chimes' : '♫ Play Chimes'}
+            </button>
+          )}
           {progress.completedDays.includes(18) && (
             <button type="button" className="toolbar-btn" onClick={openWishLetter}>
               ✉ Wish Letter
@@ -446,6 +494,11 @@ export function App() {
           <Day19Stockings
             existingState={progress.day19}
             onComplete={completeDay19}
+          />
+        ) : activeDay?.day === 20 ? (
+          <Day20MusicBox
+            existingState={progress.day20}
+            onComplete={completeDay20}
           />
         ) : (
           activeDay && <p>{activeDay.description}</p>

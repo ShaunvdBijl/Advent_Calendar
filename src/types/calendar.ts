@@ -138,6 +138,11 @@ export interface Day19State {
   stockings: StockingConfig[];
 }
 
+export interface Day20State {
+  repairedAt: string;
+  melody: 'jingle-chimes' | 'silent-chimes';
+}
+
 export interface CalendarProgress {
   completedDays: number[];
   day1?: Day1State;
@@ -159,4 +164,5 @@ export interface CalendarProgress {
   day17?: Day17State;
   day18?: Day18State;
   day19?: Day19State;
+  day20?: Day20State;
 }
