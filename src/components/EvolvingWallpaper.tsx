@@ -22,6 +22,13 @@ export function EvolvingWallpaper({ progress }: EvolvingWallpaperProps) {
   const treeScaleY = progress.day2?.heightScale === 'cozy' ? 0.92 : 1.05;
   const garlandStyle = progress.day3?.garlandStyle ?? 'none';
   const ornaments = progress.day3?.ornaments ?? [];
+  const frameStyle = progress.day6?.frameStyle ?? 'ornate-gold';
+  const frameMatHex =
+    progress.day6?.matColor === 'forest'
+      ? '#1e4635'
+      : progress.day6?.matColor === 'crimson'
+        ? '#7a1f26'
+        : '#f4ece0';
 
   return (
     <div className="wallpaper-layer" aria-hidden="true">
@@ -48,6 +55,16 @@ export function EvolvingWallpaper({ progress }: EvolvingWallpaperProps) {
           <linearGradient id="snowGround" x1="0" y1="0" x2="0" y2="1">
             <stop offset="0%" stopColor="#dce9f7" />
             <stop offset="100%" stopColor="#a7c0dc" />
+          </linearGradient>
+          <linearGradient id="wpGoldFrame" x1="0" y1="0" x2="1" y2="1">
+            <stop offset="0%" stopColor="#f5d57a" />
+            <stop offset="50%" stopColor="#c49234" />
+            <stop offset="100%" stopColor="#8c621c" />
+          </linearGradient>
+          <linearGradient id="wpWoodFrame" x1="0" y1="0" x2="1" y2="1">
+            <stop offset="0%" stopColor="#8c5832" />
+            <stop offset="50%" stopColor="#693e20" />
+            <stop offset="100%" stopColor="#4a2a14" />
           </linearGradient>
         </defs>
 
@@ -150,8 +167,61 @@ export function EvolvingWallpaper({ progress }: EvolvingWallpaperProps) {
           <rect x="365" y="425" width="220" height="225" rx="90" fill="#181416" />
           {/* Mantle Shelf */}
           <rect x="305" y="325" width="340" height="28" rx="5" fill="#7c4f31" />
-          {/* Picture Frame Hook on Wall */}
-          <circle cx="205" cy="210" r="5" fill="#c9a459" />
+          {/* Picture Frame Hook on Wall Above Mantle */}
+          <circle cx="475" cy="115" r="5" fill="#c9a459" />
+
+          {/* Day 6 Evolution: Framed Christmas Photo Hung Above Fireplace */}
+          {hasDay6 && (
+            <g id="day6-framed-photo">
+              {/* Hanging wire */}
+              <polyline
+                points="415,142 475,115 535,142"
+                fill="none"
+                stroke="#d9b166"
+                strokeWidth="2.5"
+              />
+              {/* Shadow */}
+              <rect x="383" y="146" width="192" height="150" rx="5" fill="rgba(0,0,0,0.42)" />
+              {/* Outer Frame */}
+              <rect
+                x="379"
+                y="140"
+                width="192"
+                height="150"
+                rx="4"
+                fill={frameStyle === 'ornate-gold' ? 'url(#wpGoldFrame)' : 'url(#wpWoodFrame)'}
+                stroke={frameStyle === 'ornate-gold' ? '#ffe394' : '#3d2210'}
+                strokeWidth="2.5"
+              />
+              {frameStyle === 'ornate-gold' ? (
+                <g fill="none" stroke="#ffebad" strokeWidth="1.5" opacity="0.85">
+                  <rect x="385" y="146" width="180" height="138" rx="2" />
+                  <circle cx="388" cy="149" r="2.8" fill="#ffe394" />
+                  <circle cx="562" cy="149" r="2.8" fill="#ffe394" />
+                  <circle cx="388" cy="281" r="2.8" fill="#ffe394" />
+                  <circle cx="562" cy="281" r="2.8" fill="#ffe394" />
+                </g>
+              ) : (
+                <g stroke="#3d2210" strokeWidth="1.5" opacity="0.65">
+                  <line x1="379" y1="140" x2="393" y2="154" />
+                  <line x1="571" y1="140" x2="557" y2="154" />
+                  <line x1="379" y1="290" x2="393" y2="276" />
+                  <line x1="571" y1="290" x2="557" y2="276" />
+                </g>
+              )}
+              {/* Inner Mat */}
+              <rect x="393" y="154" width="164" height="122" fill={frameMatHex} />
+              {/* Artwork from Days 4–5 */}
+              <g transform="translate(403, 161) scale(0.45)">
+                <ChristmasPhotoArt
+                  template={progress.day4?.template ?? 'cabin'}
+                  strokes={progress.day4?.strokes ?? []}
+                  regionColors={progress.day5?.regionColors}
+                  colorStrokes={progress.day5?.colorStrokes}
+                />
+              </g>
+            </g>
+          )}
         </g>
 
         {/* Side Table (Right of Fireplace) */}

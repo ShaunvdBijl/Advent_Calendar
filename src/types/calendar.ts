@@ -53,6 +53,12 @@ export interface Day5State {
   colorStrokes: PhotoStroke[];
 }
 
+export interface Day6State {
+  framedAt: string;
+  frameStyle: 'rustic-wood' | 'ornate-gold';
+  matColor: 'cream' | 'forest' | 'crimson';
+}
+
 export interface CalendarProgress {
   completedDays: number[];
   day1?: Day1State;
@@ -60,4 +66,5 @@ export interface CalendarProgress {
   day3?: Day3State;
   day4?: Day4State;
   day5?: Day5State;
+  day6?: Day6State;
 }
