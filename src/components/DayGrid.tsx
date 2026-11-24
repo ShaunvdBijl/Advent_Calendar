@@ -5,11 +5,10 @@ import type { ScheduleSnapshot } from '../utils/adventSchedule';
 interface DayGridProps {
   progress: CalendarProgress;
   schedule: ScheduleSnapshot | null;
-  unlockAll: boolean;
   onSelectDay: (day: DayMeta) => void;
 }
 
-export function DayGrid({ progress, schedule, unlockAll, onSelectDay }: DayGridProps) {
+export function DayGrid({ progress, schedule, onSelectDay }: DayGridProps) {
   return (
     <div className="day-grid" role="list" aria-label="Advent calendar days 1 through 24">
       {ADVENT_DAYS.map((dayMeta) => {
@@ -18,9 +17,9 @@ export function DayGrid({ progress, schedule, unlockAll, onSelectDay }: DayGridP
         const previousDone = dayMeta.day === 1 || progress.completedDays.includes(dayMeta.day - 1);
         const isClickable =
           dayMeta.implemented &&
-          (unlockAll || isCompleted || (isDateUnlocked && previousDone));
+          (isCompleted || (isDateUnlocked && previousDone));
         const unlockLabel = schedule?.unlockLabels[dayMeta.day];
-        const lockedByDate = !unlockAll && !isDateUnlocked && !isCompleted;
+        const lockedByDate = !isDateUnlocked && !isCompleted;
 
         return (
           <button
