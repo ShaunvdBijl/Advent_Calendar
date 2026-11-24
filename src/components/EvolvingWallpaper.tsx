@@ -1,5 +1,6 @@
 import type { CalendarProgress } from '../types/calendar';
 import { ChristmasPhotoArt } from './ChristmasPhotoArt';
+import { GingerbreadHouseArt } from './GingerbreadHouseArt';
 
 interface EvolvingWallpaperProps {
   progress: CalendarProgress;
@@ -16,6 +17,7 @@ export function EvolvingWallpaper({ progress }: EvolvingWallpaperProps) {
   const hasDay8 = progress.completedDays.includes(8);
   const hasDay9 = progress.completedDays.includes(9);
   const hasDay10 = progress.completedDays.includes(10);
+  const hasDay15 = progress.completedDays.includes(15);
   const treeColors =
     progress.day1?.treeVariant === 'spruce'
       ? { dark: '#18423e', mid: '#215853', light: '#2d756e' }
@@ -376,6 +378,19 @@ export function EvolvingWallpaper({ progress }: EvolvingWallpaperProps) {
               {/* Subtle warm baking steam */}
               <path d="M 28 2 Q 24 -6 30 -12" fill="none" stroke="#ffe7c2" strokeWidth="1.8" strokeLinecap="round" className="steam-rise" />
               <path d="M 68 4 Q 64 -4 70 -10" fill="none" stroke="#ffe7c2" strokeWidth="1.8" strokeLinecap="round" className="steam-rise" style={{ animationDelay: '0.7s' }} />
+            </g>
+          )}
+
+          {/* Day 10 Evolution: Completed Gingerbread House on Side Table (until Day 15 glowing display) */}
+          {hasDay10 && !hasDay15 && (
+            <g id="day10-gingerbread-house" transform="translate(688, 502) scale(0.5)">
+              <GingerbreadHouseArt
+                spiceBlend={progress.day9?.spiceBlend}
+                icingColor={progress.day10?.icingColor}
+                candyTheme={progress.day10?.candyTheme}
+                stage={4}
+                glowingWindows={false}
+              />
             </g>
           )}
         </g>

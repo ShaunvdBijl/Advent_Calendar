@@ -74,6 +74,12 @@ export interface Day9State {
   spiceBlend: 'classic-ginger' | 'dark-molasses' | 'honey-cinnamon';
 }
 
+export interface Day10State {
+  builtAt: string;
+  icingColor: 'snow-white' | 'mint-cream' | 'pink-frost';
+  candyTheme: 'peppermint' | 'gumdrop-rainbow' | 'gold-dragees';
+}
+
 export interface CalendarProgress {
   completedDays: number[];
   day1?: Day1State;
@@ -85,4 +91,5 @@ export interface CalendarProgress {
   day7?: Day7State;
   day8?: Day8State;
   day9?: Day9State;
+  day10?: Day10State;
 }
