@@ -1,37 +1,57 @@
 import { ADVENT_DAYS } from '../data/days';
 import type { CalendarProgress, DayMeta } from '../types/calendar';
+import type { ScheduleSnapshot } from '../utils/adventSchedule';
 
 interface DayGridProps {
   progress: CalendarProgress;
+  schedule: ScheduleSnapshot | null;
   unlockAll: boolean;
   onSelectDay: (day: DayMeta) => void;
 }
 
-export function DayGrid({ progress, unlockAll, onSelectDay }: DayGridProps) {
+export function DayGrid({ progress, schedule, unlockAll, onSelectDay }: DayGridProps) {
   return (
     <div className="day-grid" role="list" aria-label="Advent calendar days 1 through 24">
       {ADVENT_DAYS.map((dayMeta) => {
         const isCompleted = progress.completedDays.includes(dayMeta.day);
+        const isDateUnlocked = schedule ? schedule.unlockedDays.has(dayMeta.day) : false;
         const previousDone = dayMeta.day === 1 || progress.completedDays.includes(dayMeta.day - 1);
-        const isClickable = dayMeta.implemented && (unlockAll || previousDone || isCompleted);
+        const isClickable =
+          dayMeta.implemented &&
+          (unlockAll || isCompleted || (isDateUnlocked && previousDone));
+        const unlockLabel = schedule?.unlockLabels[dayMeta.day];
+        const lockedByDate = !unlockAll && !isDateUnlocked && !isCompleted;
 
         return (
           <button
             key={dayMeta.day}
             type="button"
-            className={`day-tile${isCompleted ? ' completed' : ''}`}
+            className={`day-tile${isCompleted ? ' completed' : ''}${lockedByDate ? ' date-locked' : ''}`}
             disabled={!isClickable}
             onClick={() => onSelectDay(dayMeta)}
-            aria-label={`Day ${dayMeta.day}: ${dayMeta.title}${isCompleted ? ' (completed)' : ''}`}
+            title={
+              lockedByDate && unlockLabel
+                ? `Unlocks ${unlockLabel}`
+                : !isClickable && !previousDone
+                  ? `Complete Day ${dayMeta.day - 1} first`
+                  : dayMeta.title
+            }
+            aria-label={`Day ${dayMeta.day}: ${dayMeta.title}${
+              isCompleted
+                ? ' (completed)'
+                : lockedByDate && unlockLabel
+                  ? ` (unlocks ${unlockLabel})`
+                  : ''
+            }`}
           >
             {isCompleted && (
               <span className="day-badge done" aria-hidden="true">
                 ✓
               </span>
             )}
-            {!dayMeta.implemented && (
-              <span className="day-badge soon" aria-hidden="true">
-                Soon
+            {lockedByDate && (
+              <span className="day-badge lock" aria-hidden="true">
+                Dec {dayMeta.day}
               </span>
             )}
             <span className="day-number">{dayMeta.day}</span>
