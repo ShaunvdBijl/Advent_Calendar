@@ -39,6 +39,7 @@ export function EvolvingWallpaper({
   const hasDay21 = progress.completedDays.includes(21);
   const hasDay22 = progress.completedDays.includes(22);
   const hasDay23 = progress.completedDays.includes(23);
+  const hasDay24 = progress.completedDays.includes(24);
   const treeColors =
     progress.day1?.treeVariant === 'spruce'
       ? { dark: '#18423e', mid: '#215853', light: '#2d756e' }
@@ -97,6 +98,13 @@ export function EvolvingWallpaper({
       : progress.day21?.glowStyle === 'frosted-teal'
         ? { core: '#99f6e4', halo: '#2dd4bf' }
         : { core: '#ffbe55', halo: '#ff922b' };
+  const starStyle = progress.day24?.starStyle ?? 'classic-gold';
+  const starColors =
+    starStyle === 'bethlehem-burst'
+      ? { fill: '#fff3b0', stroke: '#e0a938', halo: '#ffe07d' }
+      : starStyle === 'crystal-silver'
+        ? { fill: '#e0f2fe', stroke: '#60a5fa', halo: '#93c5fd' }
+        : { fill: '#ffe169', stroke: '#d49a1a', halo: '#ffcf4d' };
 
   return (
     <div className="wallpaper-layer">
@@ -152,6 +160,11 @@ export function EvolvingWallpaper({
             <stop offset="0%" stopColor="#ffe07d" stopOpacity="0.45" />
             <stop offset="60%" stopColor="#ffb347" stopOpacity="0.14" />
             <stop offset="100%" stopColor="#ffb347" stopOpacity="0" />
+          </radialGradient>
+          <radialGradient id="wpStarGlow" cx="50%" cy="50%" r="50%">
+            <stop offset="0%" stopColor={starColors.halo} stopOpacity="0.72" />
+            <stop offset="50%" stopColor={starColors.halo} stopOpacity="0.22" />
+            <stop offset="100%" stopColor={starColors.halo} stopOpacity="0" />
           </radialGradient>
           <clipPath id="windowSnowClip">
             <rect x="830" y="100" width="680" height="470" />
@@ -914,6 +927,46 @@ export function EvolvingWallpaper({
                       </g>
                     );
                   })}
+                </g>
+              )}
+
+              {/* Day 24 Finale Evolution: Glowing Tree Topper Star */}
+              {hasDay24 && (
+                <g id="day24-tree-star" transform="translate(165, 210)">
+                  <circle r="72" fill="url(#wpStarGlow)" className="fire-glow-pulse" />
+                  {starStyle === 'bethlehem-burst' ? (
+                    <g>
+                      <polygon
+                        points="0,-32 7,-9 30,0 7,9 0,32 -7,9 -30,0 -7,-9"
+                        fill={starColors.fill}
+                        stroke={starColors.stroke}
+                        strokeWidth="2.5"
+                        strokeLinejoin="round"
+                      />
+                      <polygon
+                        points="0,-18 4.5,-4.5 18,0 4.5,4.5 0,18 -4.5,4.5 -18,0 -4.5,-4.5"
+                        fill="#ffffff"
+                        opacity="0.88"
+                        transform="rotate(45)"
+                      />
+                    </g>
+                  ) : (
+                    <g>
+                      <polygon
+                        points="0,-30 8,-9 30,-8 13,6 18,27 0,14 -18,27 -13,6 -30,-8 -8,-9"
+                        fill={starColors.fill}
+                        stroke={starColors.stroke}
+                        strokeWidth="2.5"
+                        strokeLinejoin="round"
+                      />
+                      {starStyle === 'crystal-silver' && (
+                        <polygon points="0,-16 6,0 0,16 -6,0" fill="#ffffff" opacity="0.9" />
+                      )}
+                    </g>
+                  )}
+                  <text x="-44" y="-20" fill={starColors.fill} fontSize="14" className="twinkle-a">✦</text>
+                  <text x="36" y="-22" fill={starColors.fill} fontSize="14" className="twinkle-b">✦</text>
+                  <text x="44" y="16" fill={starColors.fill} fontSize="12" className="twinkle-a">✦</text>
                 </g>
               )}
             </g>

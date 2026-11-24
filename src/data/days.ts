@@ -24,5 +24,5 @@ export const ADVENT_DAYS: DayMeta[] = [
   { day: 21, title: 'Light Outdoor Lanterns', description: 'Light the pathway lanterns to guide Santa’s sleigh.', implemented: true },
   { day: 22, title: 'Prep Eggnog', description: 'Whisk and spice a cozy batch of holiday eggnog.', implemented: true },
   { day: 23, title: 'Milk by the Hearth', description: 'Place a glass of milk next to the cookies for Santa.', implemented: true },
-  { day: 24, title: 'Place the Tree Star', description: 'Guide the glowing star to the very top of the Christmas tree.', implemented: false },
+  { day: 24, title: 'Place the Tree Star', description: 'Guide the glowing star to the very top of the Christmas tree.', implemented: true },
 ];
