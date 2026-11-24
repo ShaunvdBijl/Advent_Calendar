@@ -18,7 +18,9 @@ import { Day13OutdoorLights } from './days/Day13OutdoorLights';
 import { Day14BirdFeeder } from './days/Day14BirdFeeder';
 import { Day15DisplayGingerbread } from './days/Day15DisplayGingerbread';
 import { Day16DecorateCookies } from './days/Day16DecorateCookies';
+import { ADVENT_DAYS } from './data/days';
 import { Day17WrapPresents } from './days/Day17WrapPresents';
+import { Day18WishLetter } from './days/Day18WishLetter';
 import type {
   CalendarProgress,
   Day1State,
@@ -38,6 +40,7 @@ import type {
   Day15State,
   Day16State,
   Day17State,
+  Day18State,
   DayMeta,
 } from './types/calendar';
 
@@ -264,9 +267,25 @@ export function App() {
     setActiveDay(null);
   };
 
+  const completeDay18 = (day18State: Day18State) => {
+    setProgress((prev) => ({
+      ...prev,
+      completedDays: prev.completedDays.includes(18)
+        ? prev.completedDays
+        : [...prev.completedDays, 18].sort((a, b) => a - b),
+      day18: day18State,
+    }));
+    setActiveDay(null);
+  };
+
+  const openWishLetter = () => {
+    const day18Meta = ADVENT_DAYS.find((d) => d.day === 18);
+    if (day18Meta) setActiveDay(day18Meta);
+  };
+
   return (
     <div className="app-shell">
-      <EvolvingWallpaper progress={progress} />
+      <EvolvingWallpaper progress={progress} onOpenWishLetter={openWishLetter} />
 
       <header className="top-bar">
         <div className="brand">
@@ -277,6 +296,11 @@ export function App() {
         </div>
 
         <div className="toolbar-actions">
+          {progress.completedDays.includes(18) && (
+            <button type="button" className="toolbar-btn" onClick={openWishLetter}>
+              ✉ Wish Letter
+            </button>
+          )}
           <button
             type="button"
             className="toolbar-btn"
@@ -399,6 +423,11 @@ export function App() {
           <Day17WrapPresents
             existingState={progress.day17}
             onComplete={completeDay17}
+          />
+        ) : activeDay?.day === 18 ? (
+          <Day18WishLetter
+            existingState={progress.day18}
+            onComplete={completeDay18}
           />
         ) : (
           activeDay && <p>{activeDay.description}</p>

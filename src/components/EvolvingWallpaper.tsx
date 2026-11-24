@@ -5,9 +5,10 @@ import { SnowmanArt } from './SnowmanArt';
 
 interface EvolvingWallpaperProps {
   progress: CalendarProgress;
+  onOpenWishLetter?: () => void;
 }
 
-export function EvolvingWallpaper({ progress }: EvolvingWallpaperProps) {
+export function EvolvingWallpaper({ progress, onOpenWishLetter }: EvolvingWallpaperProps) {
   const hasDay1 = progress.completedDays.includes(1);
   const hasDay2 = progress.completedDays.includes(2);
   const hasDay3 = progress.completedDays.includes(3);
@@ -25,6 +26,7 @@ export function EvolvingWallpaper({ progress }: EvolvingWallpaperProps) {
   const hasDay15 = progress.completedDays.includes(15);
   const hasDay16 = progress.completedDays.includes(16);
   const hasDay17 = progress.completedDays.includes(17);
+  const hasDay18 = progress.completedDays.includes(18);
   const treeColors =
     progress.day1?.treeVariant === 'spruce'
       ? { dark: '#18423e', mid: '#215853', light: '#2d756e' }
@@ -71,9 +73,15 @@ export function EvolvingWallpaper({ progress }: EvolvingWallpaperProps) {
         ? '#1e3557'
         : '#b82830';
   const giftRibbonColor = progress.day17?.ribbonColor ?? '#f0c674';
+  const sealHex =
+    progress.day18?.sealColor === 'gold'
+      ? '#d4a33c'
+      : progress.day18?.sealColor === 'pine'
+        ? '#1f5c3e'
+        : '#b82830';
 
   return (
-    <div className="wallpaper-layer" aria-hidden="true">
+    <div className="wallpaper-layer">
       <svg
         className="wallpaper-svg"
         viewBox="0 0 1600 900"
@@ -395,6 +403,31 @@ export function EvolvingWallpaper({ progress }: EvolvingWallpaperProps) {
 
           {/* Mantle Shelf */}
           <rect x="305" y="325" width="340" height="28" rx="5" fill="#7c4f31" />
+
+          {/* Day 18 Evolution: Clickable Wax-Sealed Wish Letter Tucked on Mantlepiece */}
+          {hasDay18 && (
+            <g
+              id="day18-mantle-envelope"
+              transform="translate(572, 294) rotate(-6)"
+              className="mantle-envelope-btn"
+              onClick={onOpenWishLetter}
+              role="button"
+              tabIndex={0}
+              aria-label="Open and re-read your holiday wish letter"
+              onKeyDown={(e) => {
+                if (e.key === 'Enter' || e.key === ' ') {
+                  e.preventDefault();
+                  onOpenWishLetter?.();
+                }
+              }}
+            >
+              <title>Click to re-read your holiday wish letter</title>
+              <rect x="0" y="0" width="56" height="36" rx="3" fill="#f5ead6" stroke="#b9a07a" strokeWidth="1.8" />
+              <polygon points="0,0 28,21 56,0" fill="#ebdac0" stroke="#b9a07a" strokeWidth="1.5" />
+              <circle cx="28" cy="20" r="6" fill={sealHex} />
+            </g>
+          )}
+
           {/* Picture Frame Hook on Wall Above Mantle */}
           <circle cx="475" cy="115" r="5" fill="#c9a459" />
 
