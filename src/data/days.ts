@@ -11,7 +11,7 @@ export const ADVENT_DAYS: DayMeta[] = [
   { day: 8, title: 'Start Snow Machine', description: 'Press the button to start a gentle, permanent snowfall outside.', implemented: true },
   { day: 9, title: 'Prep Gingerbread', description: 'Mix, roll, and bake gingerbread dough.', implemented: true },
   { day: 10, title: 'Build Gingerbread House', description: 'Assemble the walls, roof, and icing of your gingerbread house.', implemented: true },
-  { day: 11, title: 'Build Snowman', description: 'Drag and stack snowballs in the yard to build a snowman.', implemented: false },
+  { day: 11, title: 'Build Snowman', description: 'Drag and stack snowballs in the yard to build a snowman.', implemented: true },
   { day: 12, title: 'Dress the Snowman', description: 'Add a scarf, carrot nose, buttons, and top hat.', implemented: false },
   { day: 13, title: 'String Outdoor Lights', description: 'Connect twinkling holiday lights along the roofline.', implemented: false },
   { day: 14, title: 'Winter Bird Feeder', description: 'Assemble a wooden feeder and scatter seeds to welcome a winter robin.', implemented: false },
