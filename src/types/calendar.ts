@@ -119,6 +119,13 @@ export interface Day17State {
   ribbonColor: string;
 }
 
+export interface Day18State {
+  writtenAt: string;
+  recipient: string;
+  message: string;
+  sealColor: 'crimson' | 'gold' | 'pine';
+}
+
 export interface CalendarProgress {
   completedDays: number[];
   day1?: Day1State;
@@ -138,4 +145,5 @@ export interface CalendarProgress {
   day15?: Day15State;
   day16?: Day16State;
   day17?: Day17State;
+  day18?: Day18State;
 }
