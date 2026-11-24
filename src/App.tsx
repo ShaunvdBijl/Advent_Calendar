@@ -13,6 +13,7 @@ import { Day08SnowMachine } from './days/Day08SnowMachine';
 import { Day09PrepGingerbread } from './days/Day09PrepGingerbread';
 import { Day10BuildGingerbreadHouse } from './days/Day10BuildGingerbreadHouse';
 import { Day11BuildSnowman } from './days/Day11BuildSnowman';
+import { Day12DressSnowman } from './days/Day12DressSnowman';
 import type {
   CalendarProgress,
   Day1State,
@@ -26,6 +27,7 @@ import type {
   Day9State,
   Day10State,
   Day11State,
+  Day12State,
   DayMeta,
 } from './types/calendar';
 
@@ -186,6 +188,17 @@ export function App() {
     setActiveDay(null);
   };
 
+  const completeDay12 = (day12State: Day12State) => {
+    setProgress((prev) => ({
+      ...prev,
+      completedDays: prev.completedDays.includes(12)
+        ? prev.completedDays
+        : [...prev.completedDays, 12].sort((a, b) => a - b),
+      day12: day12State,
+    }));
+    setActiveDay(null);
+  };
+
   return (
     <div className="app-shell">
       <EvolvingWallpaper progress={progress} />
@@ -288,6 +301,12 @@ export function App() {
           <Day11BuildSnowman
             existingState={progress.day11}
             onComplete={completeDay11}
+          />
+        ) : activeDay?.day === 12 ? (
+          <Day12DressSnowman
+            stickArms={progress.day11?.stickArms}
+            existingState={progress.day12}
+            onComplete={completeDay12}
           />
         ) : (
           activeDay && <p>{activeDay.description}</p>

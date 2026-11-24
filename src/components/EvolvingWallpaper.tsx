@@ -19,6 +19,7 @@ export function EvolvingWallpaper({ progress }: EvolvingWallpaperProps) {
   const hasDay9 = progress.completedDays.includes(9);
   const hasDay10 = progress.completedDays.includes(10);
   const hasDay11 = progress.completedDays.includes(11);
+  const hasDay12 = progress.completedDays.includes(12);
   const hasDay15 = progress.completedDays.includes(15);
   const treeColors =
     progress.day1?.treeVariant === 'spruce'
@@ -166,10 +167,17 @@ export function EvolvingWallpaper({ progress }: EvolvingWallpaperProps) {
           </g>
         )}
 
-        {/* Day 11 Evolution: Snowman Standing in the Snowy Yard */}
-        {hasDay11 && (
+        {/* Day 11–12 Evolution: Snowman Standing in the Snowy Yard */}
+        {(hasDay11 || hasDay12) && (
           <g id="day11-yard-snowman" transform="translate(1265, 536) scale(0.95)">
-            <SnowmanArt stickArms={progress.day11?.stickArms ?? 'waving'} />
+            <SnowmanArt
+              stickArms={progress.day11?.stickArms ?? 'waving'}
+              scarfColor={hasDay12 ? (progress.day12?.scarfColor ?? '#c92a35') : undefined}
+              hasCarrotNose={hasDay12}
+              hasButtons={hasDay12}
+              hasTopHat={hasDay12}
+              hatBandColor={progress.day12?.hatBandColor ?? '#c92a35'}
+            />
           </g>
         )}
 
