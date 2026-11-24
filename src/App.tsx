@@ -27,6 +27,11 @@ import { Day21OutdoorLanterns } from './days/Day21OutdoorLanterns';
 import { Day22PrepEggnog } from './days/Day22PrepEggnog';
 import { Day23MilkByHearth } from './days/Day23MilkByHearth';
 import { Day24TreeStar } from './days/Day24TreeStar';
+import {
+  computeScheduleSnapshot,
+  ensureTemporal,
+  type ScheduleSnapshot,
+} from './utils/adventSchedule';
 import { startMusicBox, stopMusicBox } from './utils/musicBoxAudio';
 import type {
   CalendarProgress,
@@ -80,6 +85,25 @@ export function App() {
   const [hideGrid, setHideGrid] = useState(false);
   const [unlockAll, setUnlockAll] = useState(false);
   const [musicPlaying, setMusicPlaying] = useState(false);
+  const [schedule, setSchedule] = useState<ScheduleSnapshot | null>(null);
+
+  useEffect(() => {
+    let cancelled = false;
+    let intervalId: number | null = null;
+
+    void ensureTemporal().then((T) => {
+      if (cancelled) return;
+      setSchedule(computeScheduleSnapshot(T));
+      intervalId = window.setInterval(() => {
+        setSchedule(computeScheduleSnapshot(T));
+      }, 30_000);
+    });
+
+    return () => {
+      cancelled = true;
+      if (intervalId !== null) window.clearInterval(intervalId);
+    };
+  }, []);
 
   useEffect(() => {
     return () => {
@@ -396,6 +420,13 @@ export function App() {
           <span className="progress-pill">
             {progress.completedDays.length} / 24 Days Complete
           </span>
+          {schedule && !unlockAll && (
+            <span className="schedule-pill">
+              {schedule.nextUnlockDay !== null && schedule.nextUnlockCountdown
+                ? `Day ${schedule.nextUnlockDay} unlocks in ${schedule.nextUnlockCountdown} (00:01 SAST)`
+                : 'All 24 Days Unlocked (SAST)'}
+            </span>
+          )}
         </div>
 
         <div className="toolbar-actions">
@@ -428,7 +459,7 @@ export function App() {
             aria-pressed={unlockAll}
             onClick={() => setUnlockAll((v) => !v)}
           >
-            {unlockAll ? 'Sequential Mode' : 'Unlock All'}
+            {unlockAll ? 'SAST Schedule' : 'Preview All Days'}
           </button>
           <button type="button" className="toolbar-btn" onClick={handleReset}>
             Reset Progress
@@ -439,6 +470,7 @@ export function App() {
       <main className={`calendar-stage${hideGrid ? ' hidden-grid' : ''}`}>
         <DayGrid
           progress={progress}
+          schedule={schedule}
           unlockAll={unlockAll}
           onSelectDay={setActiveDay}
         />

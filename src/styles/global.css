@@ -920,3 +920,19 @@ dialog.day-dialog::backdrop {
 .gear-spin-cw-fast {
   animation: gearSpinCW 3.6s linear infinite;
 }
+
+/* SAST Schedule Pill & Date-Locked Tiles */
+.schedule-pill {
+  font-size: 0.78rem;
+  padding: 0.2rem 0.6rem;
+  border-radius: 999px;
+  background: rgba(94, 181, 247, 0.14);
+  border: 1px solid rgba(94, 181, 247, 0.35);
+  color: #bae6fd;
+}
+
+.day-badge.lock {
+  color: #93c5fd;
+  font-size: 0.64rem;
+  font-weight: 600;
+}
