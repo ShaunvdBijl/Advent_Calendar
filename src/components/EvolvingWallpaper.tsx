@@ -37,6 +37,7 @@ export function EvolvingWallpaper({
   const hasDay19 = progress.completedDays.includes(19);
   const hasDay20 = progress.completedDays.includes(20);
   const hasDay21 = progress.completedDays.includes(21);
+  const hasDay22 = progress.completedDays.includes(22);
   const treeColors =
     progress.day1?.treeVariant === 'spruce'
       ? { dark: '#18423e', mid: '#215853', light: '#2d756e' }
@@ -401,6 +402,33 @@ export function EvolvingWallpaper({
                 stage={4}
                 glowingWindows
               />
+            </g>
+          </g>
+        )}
+
+        {/* Day 22 Evolution: Steaming Holiday Eggnog Mug on Windowsill */}
+        {hasDay22 && (
+          <g id="day22-eggnog-mug" transform="translate(882, 526) scale(0.42)">
+            <path d="M 106 32 C 134 32, 134 84, 106 84" fill="none" stroke="#b82830" strokeWidth="12" strokeLinecap="round" />
+            <ellipse cx="58" cy="24" rx="48" ry="11" fill="#f5dfad" />
+            <ellipse cx="58" cy="21" rx="34" ry="8" fill="#fff8e8" />
+            {(progress.day22?.topping ?? 'cinnamon-stick') === 'cinnamon-stick' && (
+              <rect x="72" y="-18" width="9" height="46" rx="3" fill="#7c4120" transform="rotate(24 76 12)" />
+            )}
+            {progress.day22?.topping === 'whipped-nutmeg' && (
+              <path d="M 32 24 Q 58 -4 84 24 Z" fill="#ffffff" />
+            )}
+            {progress.day22?.topping === 'caramel-drizzle' && (
+              <path d="M 34 22 Q 46 15 58 22 T 84 20" fill="none" stroke="#c97a2b" strokeWidth="4" strokeLinecap="round" />
+            )}
+            <path d="M 8 24 L 8 92 C 8 110, 108 110, 108 92 L 108 24 C 108 36, 8 36, 8 24 Z" fill="#b82830" stroke="#7a181e" strokeWidth="3" />
+            <g stroke="#f0c674" strokeWidth="3" strokeLinecap="round">
+              <line x1="58" y1="54" x2="58" y2="82" />
+              <line x1="44" y1="68" x2="72" y2="68" />
+            </g>
+            <g fill="none" stroke="#ffe7c2" strokeWidth="3.5" strokeLinecap="round" opacity="0.75">
+              <path d="M 42 -6 Q 36 -24 44 -38" className="steam-rise" />
+              <path d="M 68 -10 Q 62 -28 70 -42" className="steam-rise" style={{ animationDelay: '0.6s' }} />
             </g>
           </g>
         )}

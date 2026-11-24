@@ -148,6 +148,11 @@ export interface Day21State {
   glowStyle: 'warm-amber' | 'starlight-gold' | 'frosted-teal';
 }
 
+export interface Day22State {
+  preppedAt: string;
+  topping: 'cinnamon-stick' | 'whipped-nutmeg' | 'caramel-drizzle';
+}
+
 export interface CalendarProgress {
   completedDays: number[];
   day1?: Day1State;
@@ -171,4 +176,5 @@ export interface CalendarProgress {
   day19?: Day19State;
   day20?: Day20State;
   day21?: Day21State;
+  day22?: Day22State;
 }
