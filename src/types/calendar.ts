@@ -126,6 +126,18 @@ export interface Day18State {
   sealColor: 'crimson' | 'gold' | 'pine';
 }
 
+export interface StockingConfig {
+  id: number;
+  initial: string;
+  color: string;
+  pattern: 'solid' | 'stripes' | 'polka';
+}
+
+export interface Day19State {
+  hungAt: string;
+  stockings: StockingConfig[];
+}
+
 export interface CalendarProgress {
   completedDays: number[];
   day1?: Day1State;
@@ -146,4 +158,5 @@ export interface CalendarProgress {
   day16?: Day16State;
   day17?: Day17State;
   day18?: Day18State;
+  day19?: Day19State;
 }

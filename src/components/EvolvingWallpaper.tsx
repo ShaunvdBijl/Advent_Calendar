@@ -27,6 +27,7 @@ export function EvolvingWallpaper({ progress, onOpenWishLetter }: EvolvingWallpa
   const hasDay16 = progress.completedDays.includes(16);
   const hasDay17 = progress.completedDays.includes(17);
   const hasDay18 = progress.completedDays.includes(18);
+  const hasDay19 = progress.completedDays.includes(19);
   const treeColors =
     progress.day1?.treeVariant === 'spruce'
       ? { dark: '#18423e', mid: '#215853', light: '#2d756e' }
@@ -403,6 +404,52 @@ export function EvolvingWallpaper({ progress, onOpenWishLetter }: EvolvingWallpa
 
           {/* Mantle Shelf */}
           <rect x="305" y="325" width="340" height="28" rx="5" fill="#7c4f31" />
+
+          {/* Day 19 Evolution: Customized Stockings Hung Along Fireplace Mantle */}
+          {hasDay19 && (
+            <g id="day19-mantle-stockings">
+              {(progress.day19?.stockings ?? []).map((stocking, idx) => {
+                const sx = 372 + idx * 102;
+                return (
+                  <g key={stocking.id} transform={`translate(${sx}, 352) scale(0.55)`}>
+                    <circle cx="0" cy="-2" r="4.5" fill="#f0c674" />
+                    <path
+                      d="M -20 28 L 16 28 L 16 86 C 16 102, 24 114, 34 118 C 42 122, 40 138, 22 138 L -14 138 C -28 138, -28 120, -20 108 Z"
+                      fill={stocking.color}
+                      stroke="rgba(0,0,0,0.35)"
+                      strokeWidth="2.5"
+                    />
+                    {stocking.pattern === 'stripes' && (
+                      <g stroke="#f8fafc" strokeWidth="4.5" opacity="0.65">
+                        <line x1="-19" y1="54" x2="15" y2="54" />
+                        <line x1="-19" y1="74" x2="15" y2="74" />
+                        <line x1="-19" y1="94" x2="17" y2="94" />
+                      </g>
+                    )}
+                    {stocking.pattern === 'polka' && (
+                      <g fill="#f8fafc" opacity="0.75">
+                        <circle cx="-8" cy="54" r="3.8" />
+                        <circle cx="6" cy="64" r="3.8" />
+                        <circle cx="-10" cy="82" r="3.8" />
+                        <circle cx="5" cy="96" r="3.8" />
+                      </g>
+                    )}
+                    <rect x="-25" y="10" width="46" height="22" rx="7" fill="#faf3e3" stroke="#d4c5a9" strokeWidth="2" />
+                    <text
+                      x="-2"
+                      y="26"
+                      textAnchor="middle"
+                      fill={stocking.color}
+                      fontSize="15"
+                      fontWeight="800"
+                    >
+                      {stocking.initial || '★'}
+                    </text>
+                  </g>
+                );
+              })}
+            </g>
+          )}
 
           {/* Day 18 Evolution: Clickable Wax-Sealed Wish Letter Tucked on Mantlepiece */}
           {hasDay18 && (

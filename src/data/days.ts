@@ -19,7 +19,7 @@ export const ADVENT_DAYS: DayMeta[] = [
   { day: 16, title: 'Decorate Cookies', description: 'Pipe frosting and sprinkles onto star and tree cookies.', implemented: true },
   { day: 17, title: 'Wrap Presents', description: 'Cut paper, fold corners, and tie ribbons for gifts under the tree.', implemented: true },
   { day: 18, title: 'Holiday Wish Letter', description: 'Write a wish list, fold it into an envelope, and tuck it on the mantle.', implemented: true },
-  { day: 19, title: 'Hang Stockings', description: 'Customize patterns and initials on stockings for the fireplace.', implemented: false },
+  { day: 19, title: 'Hang Stockings', description: 'Customize patterns and initials on stockings for the fireplace.', implemented: true },
   { day: 20, title: 'Repair Music Box', description: 'Assemble three interlocking gears to unlock a holiday melody.', implemented: false },
   { day: 21, title: 'Light Outdoor Lanterns', description: 'Light the pathway lanterns to guide Santa’s sleigh.', implemented: false },
   { day: 22, title: 'Prep Eggnog', description: 'Whisk and spice a cozy batch of holiday eggnog.', implemented: false },

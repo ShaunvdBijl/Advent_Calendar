@@ -21,6 +21,7 @@ import { Day16DecorateCookies } from './days/Day16DecorateCookies';
 import { ADVENT_DAYS } from './data/days';
 import { Day17WrapPresents } from './days/Day17WrapPresents';
 import { Day18WishLetter } from './days/Day18WishLetter';
+import { Day19Stockings } from './days/Day19Stockings';
 import type {
   CalendarProgress,
   Day1State,
@@ -41,6 +42,7 @@ import type {
   Day16State,
   Day17State,
   Day18State,
+  Day19State,
   DayMeta,
 } from './types/calendar';
 
@@ -278,6 +280,17 @@ export function App() {
     setActiveDay(null);
   };
 
+  const completeDay19 = (day19State: Day19State) => {
+    setProgress((prev) => ({
+      ...prev,
+      completedDays: prev.completedDays.includes(19)
+        ? prev.completedDays
+        : [...prev.completedDays, 19].sort((a, b) => a - b),
+      day19: day19State,
+    }));
+    setActiveDay(null);
+  };
+
   const openWishLetter = () => {
     const day18Meta = ADVENT_DAYS.find((d) => d.day === 18);
     if (day18Meta) setActiveDay(day18Meta);
@@ -428,6 +441,11 @@ export function App() {
           <Day18WishLetter
             existingState={progress.day18}
             onComplete={completeDay18}
+          />
+        ) : activeDay?.day === 19 ? (
+          <Day19Stockings
+            existingState={progress.day19}
+            onComplete={completeDay19}
           />
         ) : (
           activeDay && <p>{activeDay.description}</p>
