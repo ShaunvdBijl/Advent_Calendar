@@ -4,7 +4,7 @@ export const ADVENT_DAYS: DayMeta[] = [
   { day: 1, title: 'Chop Down Tree', description: 'Venture into the snowy woods and chop down your Christmas tree.', implemented: true },
   { day: 2, title: 'Build Tree', description: 'Set up and assemble your freshly cut tree in the living room.', implemented: true },
   { day: 3, title: 'Ornaments & Decorations', description: 'Hang baubles, tinsel, and garlands on the tree.', implemented: true },
-  { day: 4, title: 'Draw Christmas Photo', description: 'Sketch a festive holiday drawing.', implemented: false },
+  { day: 4, title: 'Draw Christmas Photo', description: 'Sketch a festive holiday drawing.', implemented: true },
   { day: 5, title: 'Colour in Photo', description: 'Bring your Christmas sketch to life with warm holiday colors.', implemented: false },
   { day: 6, title: 'Frame & Hang Photo', description: 'Pick a wooden or gold frame and hang your artwork on the wall.', implemented: false },
   { day: 7, title: 'Light the Fireplace', description: 'Stack logs and strike a match to ignite a warm, flickering fire.', implemented: false },
