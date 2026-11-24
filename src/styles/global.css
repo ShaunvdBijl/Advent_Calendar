@@ -540,3 +540,20 @@ dialog.day-dialog::backdrop {
 .fill-cursor {
   cursor: pointer;
 }
+
+/* Day 6: Frame & Hang Photo */
+.day6-container {
+  display: flex;
+  flex-direction: column;
+  gap: 0.9rem;
+}
+
+.frame-unhung {
+  transform: translateY(22px) rotate(-2deg);
+  transition: transform 0.45s cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+.frame-hung {
+  transform: translateY(0) rotate(0deg);
+  transition: transform 0.55s cubic-bezier(0.22, 1, 0.36, 1);
+}
