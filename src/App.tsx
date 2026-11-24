@@ -25,6 +25,7 @@ import { Day19Stockings } from './days/Day19Stockings';
 import { Day20MusicBox } from './days/Day20MusicBox';
 import { Day21OutdoorLanterns } from './days/Day21OutdoorLanterns';
 import { Day22PrepEggnog } from './days/Day22PrepEggnog';
+import { Day23MilkByHearth } from './days/Day23MilkByHearth';
 import { startMusicBox, stopMusicBox } from './utils/musicBoxAudio';
 import type {
   CalendarProgress,
@@ -50,6 +51,7 @@ import type {
   Day20State,
   Day21State,
   Day22State,
+  Day23State,
   DayMeta,
 } from './types/calendar';
 
@@ -340,6 +342,17 @@ export function App() {
     setActiveDay(null);
   };
 
+  const completeDay23 = (day23State: Day23State) => {
+    setProgress((prev) => ({
+      ...prev,
+      completedDays: prev.completedDays.includes(23)
+        ? prev.completedDays
+        : [...prev.completedDays, 23].sort((a, b) => a - b),
+      day23: day23State,
+    }));
+    setActiveDay(null);
+  };
+
   const toggleMusic = () => {
     if (musicPlaying) {
       stopMusicBox();
@@ -535,6 +548,12 @@ export function App() {
           <Day22PrepEggnog
             existingState={progress.day22}
             onComplete={completeDay22}
+          />
+        ) : activeDay?.day === 23 ? (
+          <Day23MilkByHearth
+            day16State={progress.day16}
+            existingState={progress.day23}
+            onComplete={completeDay23}
           />
         ) : (
           activeDay && <p>{activeDay.description}</p>
