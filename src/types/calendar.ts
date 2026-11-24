@@ -59,6 +59,11 @@ export interface Day6State {
   matColor: 'cream' | 'forest' | 'crimson';
 }
 
+export interface Day7State {
+  litAt: string;
+  intensity: 'cozy' | 'roaring';
+}
+
 export interface CalendarProgress {
   completedDays: number[];
   day1?: Day1State;
@@ -67,4 +72,5 @@ export interface CalendarProgress {
   day4?: Day4State;
   day5?: Day5State;
   day6?: Day6State;
+  day7?: Day7State;
 }

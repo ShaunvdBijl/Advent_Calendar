@@ -12,6 +12,7 @@ export function EvolvingWallpaper({ progress }: EvolvingWallpaperProps) {
   const hasDay4 = progress.completedDays.includes(4);
   const hasDay5 = progress.completedDays.includes(5);
   const hasDay6 = progress.completedDays.includes(6);
+  const hasDay7 = progress.completedDays.includes(7);
   const treeColors =
     progress.day1?.treeVariant === 'spruce'
       ? { dark: '#18423e', mid: '#215853', light: '#2d756e' }
@@ -29,6 +30,7 @@ export function EvolvingWallpaper({ progress }: EvolvingWallpaperProps) {
       : progress.day6?.matColor === 'crimson'
         ? '#7a1f26'
         : '#f4ece0';
+  const fireRoaring = progress.day7?.intensity === 'roaring';
 
   return (
     <div className="wallpaper-layer" aria-hidden="true">
@@ -65,6 +67,20 @@ export function EvolvingWallpaper({ progress }: EvolvingWallpaperProps) {
             <stop offset="0%" stopColor="#8c5832" />
             <stop offset="50%" stopColor="#693e20" />
             <stop offset="100%" stopColor="#4a2a14" />
+          </linearGradient>
+          <radialGradient id="wpHearthGlow" cx="475" cy="585" r="520" gradientUnits="userSpaceOnUse">
+            <stop offset="0%" stopColor="#ff9a2e" stopOpacity={fireRoaring ? 0.36 : 0.25} />
+            <stop offset="45%" stopColor="#ff7315" stopOpacity={fireRoaring ? 0.14 : 0.09} />
+            <stop offset="100%" stopColor="#ff6a00" stopOpacity="0" />
+          </radialGradient>
+          <linearGradient id="wpFlameOuter" x1="0" y1="1" x2="0" y2="0">
+            <stop offset="0%" stopColor="#d93814" />
+            <stop offset="65%" stopColor="#ff7b1c" />
+            <stop offset="100%" stopColor="#ffd166" />
+          </linearGradient>
+          <linearGradient id="wpFlameInner" x1="0" y1="1" x2="0" y2="0">
+            <stop offset="0%" stopColor="#ff9e1f" />
+            <stop offset="100%" stopColor="#fff3b0" />
           </linearGradient>
         </defs>
 
@@ -165,6 +181,45 @@ export function EvolvingWallpaper({ progress }: EvolvingWallpaperProps) {
         <g id="fireplace-base">
           <rect x="330" y="340" width="290" height="310" rx="6" fill="#525866" />
           <rect x="365" y="425" width="220" height="225" rx="90" fill="#181416" />
+
+          {/* Day 7 Evolution: Stacked Logs & Permanent Flickering Fire */}
+          {hasDay7 && (
+            <g id="day7-fireplace-fire">
+              {/* Logs on grate */}
+              <rect x="404" y="618" width="90" height="18" rx="8" fill="#5e371f" transform="rotate(-6 449 627)" />
+              <rect x="456" y="618" width="90" height="18" rx="8" fill="#6c4024" transform="rotate(7 501 627)" />
+              <rect x="424" y="604" width="102" height="17" rx="8" fill="#7b4929" />
+
+              {/* Flickering flames */}
+              <g
+                transform={`translate(475 616) scale(${fireRoaring ? 1.15 : 0.98}) translate(-475 -616)`}
+              >
+                <path
+                  d="M 426 616 C 418 566, 448 530, 475 488 C 502 530, 532 566, 524 616 Z"
+                  fill="url(#wpFlameOuter)"
+                  className="fire-flicker-outer"
+                />
+                <path
+                  d="M 412 618 C 408 588, 428 570, 438 548 C 448 570, 454 594, 446 618 Z"
+                  fill="url(#wpFlameOuter)"
+                  className="fire-flicker-side"
+                />
+                <path
+                  d="M 502 618 C 498 592, 508 568, 518 546 C 530 570, 542 590, 536 618 Z"
+                  fill="url(#wpFlameOuter)"
+                  className="fire-flicker-side"
+                />
+                <path
+                  d="M 448 616 C 444 582, 460 558, 475 528 C 490 558, 506 582, 502 616 Z"
+                  fill="url(#wpFlameInner)"
+                  className="fire-flicker-inner"
+                />
+                <circle cx="454" cy="516" r="3" fill="#ffe08a" className="ember-rise-a" />
+                <circle cx="496" cy="504" r="2.5" fill="#ffb74d" className="ember-rise-b" />
+              </g>
+            </g>
+          )}
+
           {/* Mantle Shelf */}
           <rect x="305" y="325" width="340" height="28" rx="5" fill="#7c4f31" />
           {/* Picture Frame Hook on Wall Above Mantle */}
@@ -394,6 +449,18 @@ export function EvolvingWallpaper({ progress }: EvolvingWallpaperProps) {
               )}
             </g>
           </g>
+        )}
+        {/* Day 7 Evolution: Warm Ambient Room Glow Cast Across Cabin */}
+        {hasDay7 && (
+          <rect
+            x="0"
+            y="0"
+            width="1600"
+            height="900"
+            fill="url(#wpHearthGlow)"
+            className="fire-glow-pulse"
+            style={{ pointerEvents: 'none' }}
+          />
         )}
       </svg>
     </div>
