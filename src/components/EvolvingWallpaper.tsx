@@ -20,6 +20,7 @@ export function EvolvingWallpaper({ progress }: EvolvingWallpaperProps) {
   const hasDay10 = progress.completedDays.includes(10);
   const hasDay11 = progress.completedDays.includes(11);
   const hasDay12 = progress.completedDays.includes(12);
+  const hasDay13 = progress.completedDays.includes(13);
   const hasDay15 = progress.completedDays.includes(15);
   const treeColors =
     progress.day1?.treeVariant === 'spruce'
@@ -48,6 +49,12 @@ export function EvolvingWallpaper({ progress }: EvolvingWallpaperProps) {
       : progress.day9?.spiceBlend === 'honey-cinnamon'
         ? '#b57638'
         : '#9c5f2f';
+  const outdoorLightColors =
+    progress.day13?.palette === 'warm-white'
+      ? ['#ffe79e', '#ffd166', '#fff3c4']
+      : progress.day13?.palette === 'icicle-blue'
+        ? ['#bae6fd', '#60a5fa', '#f8fafc']
+        : ['#ef4444', '#facc15', '#22c55e', '#38bdf8'];
 
   return (
     <div className="wallpaper-layer" aria-hidden="true">
@@ -203,6 +210,44 @@ export function EvolvingWallpaper({ progress }: EvolvingWallpaperProps) {
                     animationDelay: `${delay}s`,
                   }}
                 />
+              );
+            })}
+          </g>
+        )}
+
+        {/* Day 13 Evolution: Twinkling Outdoor Roofline Lights Along Upper Window Eave */}
+        {hasDay13 && (
+          <g id="day13-outdoor-lights" clipPath="url(#windowSnowClip)">
+            <path
+              d="M 830 112 Q 915 144 1000 112 T 1170 112 T 1340 112 T 1510 112"
+              fill="none"
+              stroke="#1f2937"
+              strokeWidth="3.5"
+            />
+            {Array.from({ length: 17 }, (_, i) => {
+              const bx = 850 + i * 40;
+              const phase = (i % 4) / 4;
+              const sag = Math.sin(phase * Math.PI) * 18;
+              const by = 114 + sag;
+              const color = outdoorLightColors[i % outdoorLightColors.length];
+              return (
+                <g key={`ol-${i}`}>
+                  <circle
+                    cx={bx}
+                    cy={by}
+                    r="13"
+                    fill={color}
+                    opacity="0.24"
+                    className={i % 2 === 0 ? 'twinkle-a' : 'twinkle-b'}
+                  />
+                  <circle
+                    cx={bx}
+                    cy={by}
+                    r="5"
+                    fill={color}
+                    className={i % 2 === 0 ? 'twinkle-a' : 'twinkle-b'}
+                  />
+                </g>
               );
             })}
           </g>
