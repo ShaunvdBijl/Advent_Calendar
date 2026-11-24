@@ -10,6 +10,7 @@ export function EvolvingWallpaper({ progress }: EvolvingWallpaperProps) {
   const hasDay2 = progress.completedDays.includes(2);
   const hasDay3 = progress.completedDays.includes(3);
   const hasDay4 = progress.completedDays.includes(4);
+  const hasDay5 = progress.completedDays.includes(5);
   const hasDay6 = progress.completedDays.includes(6);
   const treeColors =
     progress.day1?.treeVariant === 'spruce'
@@ -159,8 +160,8 @@ export function EvolvingWallpaper({ progress }: EvolvingWallpaperProps) {
           <rect x="692" y="591" width="14" height="75" fill="#5c3822" />
           <rect x="769" y="591" width="14" height="75" fill="#5c3822" />
 
-          {/* Day 4 Evolution: Sketchpad resting on side table until framed on Day 6 */}
-          {hasDay4 && !hasDay6 && progress.day4 && (
+          {/* Day 4–5 Evolution: Sketchpad / colored artwork resting on side table until framed on Day 6 */}
+          {(hasDay4 || hasDay5) && !hasDay6 && (
             <g id="day4-table-sketch" transform="translate(696, 514)">
               {/* Mini wooden tabletop easel / sketchpad backing */}
               <rect
@@ -175,12 +176,24 @@ export function EvolvingWallpaper({ progress }: EvolvingWallpaperProps) {
               />
               <g transform="scale(0.25)">
                 <ChristmasPhotoArt
-                  template={progress.day4.template}
-                  strokes={progress.day4.strokes}
+                  template={progress.day4?.template ?? 'cabin'}
+                  strokes={progress.day4?.strokes ?? []}
+                  regionColors={hasDay5 ? progress.day5?.regionColors : undefined}
+                  colorStrokes={hasDay5 ? progress.day5?.colorStrokes : undefined}
                 />
               </g>
-              {/* Tiny charcoal pencil resting on table */}
-              <line x1="68" y1="62" x2="96" y2="57" stroke="#23201c" strokeWidth="3" strokeLinecap="round" />
+              {hasDay5 ? (
+                /* Tiny holiday paint palette on the table */
+                <g transform="translate(64, 54)">
+                  <ellipse cx="14" cy="7" rx="14" ry="7" fill="#d9b482" stroke="#7c4f31" strokeWidth="1" />
+                  <circle cx="8" cy="6" r="2.2" fill="#c92a35" />
+                  <circle cx="14" cy="4" r="2.2" fill="#215c3e" />
+                  <circle cx="20" cy="7" r="2.2" fill="#f0c674" />
+                </g>
+              ) : (
+                /* Tiny charcoal pencil resting on table */
+                <line x1="68" y1="62" x2="96" y2="57" stroke="#23201c" strokeWidth="3" strokeLinecap="round" />
+              )}
             </g>
           )}
         </g>

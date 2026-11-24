@@ -6,12 +6,14 @@ import { Day01ChopTree } from './days/Day01ChopTree';
 import { Day02BuildTree } from './days/Day02BuildTree';
 import { Day03DecorateTree } from './days/Day03DecorateTree';
 import { Day04DrawPhoto } from './days/Day04DrawPhoto';
+import { Day05ColorPhoto } from './days/Day05ColorPhoto';
 import type {
   CalendarProgress,
   Day1State,
   Day2State,
   Day3State,
   Day4State,
+  Day5State,
   DayMeta,
 } from './types/calendar';
 
@@ -95,6 +97,17 @@ export function App() {
     setActiveDay(null);
   };
 
+  const completeDay5 = (day5State: Day5State) => {
+    setProgress((prev) => ({
+      ...prev,
+      completedDays: prev.completedDays.includes(5)
+        ? prev.completedDays
+        : [...prev.completedDays, 5].sort((a, b) => a - b),
+      day5: day5State,
+    }));
+    setActiveDay(null);
+  };
+
   return (
     <div className="app-shell">
       <EvolvingWallpaper progress={progress} />
@@ -158,6 +171,12 @@ export function App() {
           <Day04DrawPhoto
             existingState={progress.day4}
             onComplete={completeDay4}
+          />
+        ) : activeDay?.day === 5 ? (
+          <Day05ColorPhoto
+            day4State={progress.day4}
+            existingState={progress.day5}
+            onComplete={completeDay5}
           />
         ) : (
           activeDay && <p>{activeDay.description}</p>

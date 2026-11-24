@@ -47,10 +47,17 @@ export interface Day4State {
   strokes: PhotoStroke[];
 }
 
+export interface Day5State {
+  coloredAt: string;
+  regionColors: Record<string, string>;
+  colorStrokes: PhotoStroke[];
+}
+
 export interface CalendarProgress {
   completedDays: number[];
   day1?: Day1State;
   day2?: Day2State;
   day3?: Day3State;
   day4?: Day4State;
+  day5?: Day5State;
 }
