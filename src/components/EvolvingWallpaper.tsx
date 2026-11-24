@@ -6,9 +6,16 @@ import { SnowmanArt } from './SnowmanArt';
 interface EvolvingWallpaperProps {
   progress: CalendarProgress;
   onOpenWishLetter?: () => void;
+  musicPlaying?: boolean;
+  onToggleMusic?: () => void;
 }
 
-export function EvolvingWallpaper({ progress, onOpenWishLetter }: EvolvingWallpaperProps) {
+export function EvolvingWallpaper({
+  progress,
+  onOpenWishLetter,
+  musicPlaying = false,
+  onToggleMusic,
+}: EvolvingWallpaperProps) {
   const hasDay1 = progress.completedDays.includes(1);
   const hasDay2 = progress.completedDays.includes(2);
   const hasDay3 = progress.completedDays.includes(3);
@@ -28,6 +35,7 @@ export function EvolvingWallpaper({ progress, onOpenWishLetter }: EvolvingWallpa
   const hasDay17 = progress.completedDays.includes(17);
   const hasDay18 = progress.completedDays.includes(18);
   const hasDay19 = progress.completedDays.includes(19);
+  const hasDay20 = progress.completedDays.includes(20);
   const treeColors =
     progress.day1?.treeVariant === 'spruce'
       ? { dark: '#18423e', mid: '#215853', light: '#2d756e' }
@@ -448,6 +456,36 @@ export function EvolvingWallpaper({ progress, onOpenWishLetter }: EvolvingWallpa
                   </g>
                 );
               })}
+            </g>
+          )}
+
+          {/* Day 20 Evolution: Brass Music Box Sitting on Left End of Mantlepiece */}
+          {hasDay20 && (
+            <g
+              id="day20-mantle-music-box"
+              transform="translate(318, 297)"
+              className="mantle-envelope-btn"
+              onClick={onToggleMusic}
+              role="button"
+              tabIndex={0}
+              aria-label={musicPlaying ? 'Pause holiday music box' : 'Play holiday music box'}
+              onKeyDown={(e) => {
+                if (e.key === 'Enter' || e.key === ' ') {
+                  e.preventDefault();
+                  onToggleMusic?.();
+                }
+              }}
+            >
+              <title>{musicPlaying ? 'Click to pause holiday chimes' : 'Click to play holiday chimes'}</title>
+              <rect x="0" y="6" width="44" height="24" rx="4" fill="#5c3921" stroke="#e6be63" strokeWidth="2" />
+              <path d="M 0 6 L 8 -4 L 48 -4 L 44 6 Z" fill="#7c4f31" stroke="#e6be63" strokeWidth="1.5" />
+              <circle cx="22" cy="18" r="5" fill="#f0c674" />
+              {musicPlaying && (
+                <g fill="#ffe19c" fontSize="14" fontWeight="700">
+                  <text x="10" y="-8" className="steam-rise">♪</text>
+                  <text x="28" y="-14" className="steam-rise" style={{ animationDelay: '0.6s' }}>♫</text>
+                </g>
+              )}
             </g>
           )}
 

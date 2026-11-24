@@ -889,3 +889,34 @@ dialog.day-dialog::backdrop {
   font-weight: 700;
   font-size: 0.92rem;
 }
+
+/* Day 20: Brass Music Box Interlocking Gears */
+@keyframes gearSpinCW {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+@keyframes gearSpinCCW {
+  from {
+    transform: rotate(360deg);
+  }
+  to {
+    transform: rotate(0deg);
+  }
+}
+
+.gear-spin-cw {
+  animation: gearSpinCW 6s linear infinite;
+}
+
+.gear-spin-ccw {
+  animation: gearSpinCCW 4.8s linear infinite;
+}
+
+.gear-spin-cw-fast {
+  animation: gearSpinCW 3.6s linear infinite;
+}
