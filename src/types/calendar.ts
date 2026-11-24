@@ -153,6 +153,12 @@ export interface Day22State {
   topping: 'cinnamon-stick' | 'whipped-nutmeg' | 'caramel-drizzle';
 }
 
+export interface Day23State {
+  placedAt: string;
+  milkType: 'whole-milk' | 'warm-vanilla' | 'chocolate-milk';
+  hasCandyStraw: boolean;
+}
+
 export interface CalendarProgress {
   completedDays: number[];
   day1?: Day1State;
@@ -177,4 +183,5 @@ export interface CalendarProgress {
   day20?: Day20State;
   day21?: Day21State;
   day22?: Day22State;
+  day23?: Day23State;
 }

@@ -38,6 +38,7 @@ export function EvolvingWallpaper({
   const hasDay20 = progress.completedDays.includes(20);
   const hasDay21 = progress.completedDays.includes(21);
   const hasDay22 = progress.completedDays.includes(22);
+  const hasDay23 = progress.completedDays.includes(23);
   const treeColors =
     progress.day1?.treeVariant === 'spruce'
       ? { dark: '#18423e', mid: '#215853', light: '#2d756e' }
@@ -748,6 +749,45 @@ export function EvolvingWallpaper({
               <circle cx="20" cy="8" r="1.2" fill="#ef4444" />
               <circle cx="44" cy="8" r="1.2" fill="#f0c674" />
               <circle cx="41" cy="11" r="1.1" fill="#ef4444" />
+            </g>
+          )}
+
+          {/* Day 23 Evolution: Glass of Milk Next to the Day 16 Cookies by the Hearth */}
+          {hasDay23 && (
+            <g id="day23-milk-glass" transform="translate(758, 535) scale(0.35)">
+              {progress.day23?.hasCandyStraw !== false && (
+                <>
+                  <line x1="48" y1="-22" x2="30" y2="108" stroke="#ffffff" strokeWidth="8" strokeLinecap="round" />
+                  <line
+                    x1="48"
+                    y1="-22"
+                    x2="30"
+                    y2="108"
+                    stroke="#d63638"
+                    strokeWidth="8"
+                    strokeDasharray="7 7"
+                    strokeLinecap="round"
+                  />
+                </>
+              )}
+              <polygon
+                points="4,8 68,8 60,114 12,114"
+                fill="rgba(226, 232, 240, 0.22)"
+                stroke="rgba(255, 255, 255, 0.72)"
+                strokeWidth="3.5"
+              />
+              <polygon
+                points="8,32 64,32 58,112 14,112"
+                fill={
+                  progress.day23?.milkType === 'chocolate-milk'
+                    ? '#8b5a3c'
+                    : progress.day23?.milkType === 'warm-vanilla'
+                      ? '#fcf3dc'
+                      : '#f8fafc'
+                }
+              />
+              <ellipse cx="36" cy="32" rx="28" ry="6" fill="#ffffff" opacity="0.7" />
+              <ellipse cx="36" cy="8" rx="32" ry="6.5" fill="none" stroke="rgba(255,255,255,0.8)" strokeWidth="3" />
             </g>
           )}
         </g>
