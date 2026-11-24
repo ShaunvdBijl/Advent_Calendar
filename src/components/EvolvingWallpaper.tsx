@@ -36,6 +36,7 @@ export function EvolvingWallpaper({
   const hasDay18 = progress.completedDays.includes(18);
   const hasDay19 = progress.completedDays.includes(19);
   const hasDay20 = progress.completedDays.includes(20);
+  const hasDay21 = progress.completedDays.includes(21);
   const treeColors =
     progress.day1?.treeVariant === 'spruce'
       ? { dark: '#18423e', mid: '#215853', light: '#2d756e' }
@@ -88,6 +89,12 @@ export function EvolvingWallpaper({
       : progress.day18?.sealColor === 'pine'
         ? '#1f5c3e'
         : '#b82830';
+  const lanternGlow =
+    progress.day21?.glowStyle === 'starlight-gold'
+      ? { core: '#fff0a6', halo: '#f0c674' }
+      : progress.day21?.glowStyle === 'frosted-teal'
+        ? { core: '#99f6e4', halo: '#2dd4bf' }
+        : { core: '#ffbe55', halo: '#ff922b' };
 
   return (
     <div className="wallpaper-layer">
@@ -253,6 +260,37 @@ export function EvolvingWallpaper({
                 <polygon points="14,-7 20,-5.5 14,-4" fill="#f59e0b" />
               </g>
             </g>
+          </g>
+        )}
+
+        {/* Day 21 Evolution: Lit Outdoor Pathway Lanterns & Distant Sleigh */}
+        {hasDay21 && (
+          <g id="day21-yard-lanterns" clipPath="url(#windowSnowClip)">
+            {/* Distant guiding Santa sleigh in the starry sky */}
+            <g transform="translate(1010, 178)" fill="#f0c674" opacity="0.82">
+              <path d="M 0 10 L 22 10 Q 28 10 30 4 L 25 14 L -3 14 Z" />
+              <line x1="28" y1="9" x2="62" y2="7" stroke="#f0c674" strokeWidth="1" />
+              <circle cx="44" cy="7" r="2.6" />
+              <circle cx="54" cy="6.5" r="2.6" />
+              <circle cx="65" cy="5.5" r="2.8" fill="#ef4444" className="twinkle-a" />
+            </g>
+
+            {/* 4 Glowing Iron Pathway Lanterns Across Snowy Yard */}
+            {[
+              { x: 990, y: 540, s: 0.72 },
+              { x: 1082, y: 548, s: 0.76 },
+              { x: 1365, y: 536, s: 0.72 },
+              { x: 1456, y: 526, s: 0.68 },
+            ].map((spot, idx) => (
+              <g key={idx} transform={`translate(${spot.x}, ${spot.y}) scale(${spot.s})`}>
+                <circle cx="0" cy="-26" r="42" fill={lanternGlow.halo} opacity="0.22" className="fire-glow-pulse" />
+                <ellipse cx="0" cy="4" rx="24" ry="7" fill={lanternGlow.halo} opacity="0.25" />
+                <rect x="-2.5" y="-18" width="5" height="22" fill="#262c36" />
+                <rect x="-10" y="-38" width="20" height="22" rx="3" fill={lanternGlow.core} stroke="#1e2430" strokeWidth="2.5" />
+                <polygon points="-13,-38 0,-47 13,-38" fill="#1e2430" />
+                <circle cx="0" cy="-27" r="4" fill="#ffffff" opacity="0.9" className={idx % 2 === 0 ? 'twinkle-a' : 'twinkle-b'} />
+              </g>
+            ))}
           </g>
         )}
 

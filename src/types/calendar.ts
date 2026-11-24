@@ -143,6 +143,11 @@ export interface Day20State {
   melody: 'jingle-chimes' | 'silent-chimes';
 }
 
+export interface Day21State {
+  litAt: string;
+  glowStyle: 'warm-amber' | 'starlight-gold' | 'frosted-teal';
+}
+
 export interface CalendarProgress {
   completedDays: number[];
   day1?: Day1State;
@@ -165,4 +170,5 @@ export interface CalendarProgress {
   day18?: Day18State;
   day19?: Day19State;
   day20?: Day20State;
+  day21?: Day21State;
 }
